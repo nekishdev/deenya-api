@@ -27,15 +27,19 @@ type ProductModelData struct {
 	Tags        []*string `json:"tags,omitempty" db:"tags"` //or just tags []string?
 	Name        *string   `json:"name,omitempty" db:"name"`
 	Description *string   `json:"description,omitempty" db:"description"`
-	Price       *int64    `json:"price,omitempty" db:"price"`
+	//Price       *int64    `json:"price,omitempty" db:"price"`
 }
 
 type ProductModel struct {
 	ProductModelData
 	//add dropshipping option?
-	Medias     []*Media         `json:"medias,omitempty"`
-	Categories []*Category      `json:"categories,omitempty"`
-	Reviews    []*ProductReview `json:"reviews,omitempty"` //??
+	Analytics *ProductAnalytics `json:"analytics,omitempty"`
+	Medias    []*Media          `json:"medias,omitempty"`
+	Reviews   []*ProductReview  `json:"reviews,omitempty"` //??
+}
+
+type ProductAnalytics struct {
+	Rating *int64
 }
 
 type ProductData struct {
@@ -72,12 +76,12 @@ type ProductReviewData struct {
 	Content        *string
 	Rating         *int64
 	CreatedAt      *time.Time
-	ClientID       *int64
+	OwnerID        *int64
 }
 
 //ProductReview product_review
 type ProductReview struct {
 	ProductReviewData
-	Client *User
+	Owner *User
 	//Consultant *User
 }

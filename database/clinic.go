@@ -76,7 +76,7 @@ func IsClinicAdmin(id int64, mid int64) bool {
 		fmt.Println(err)
 		return verified
 	}
-	for _, admin := range clinic.Admins {
+	for _, admin := range clinic.AdminIds {
 		if mid == *admin {
 			verified = true
 		}
@@ -92,7 +92,7 @@ func AcceptClinicRequest(id int64, mid int64, tid int64) error {
 	}
 
 	verified := false
-	for _, admin := range clinic.Admins {
+	for _, admin := range clinic.AdminIds {
 		if mid == *admin {
 			verified = true
 		}

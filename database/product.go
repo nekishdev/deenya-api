@@ -167,11 +167,11 @@ func GetProductReviews(product int64) ([]models.ProductReview, error) {
 
 func GetProductModel(id int64) (models.ProductModel, error) {
 	var data models.ProductModel
-	q := `SELECT id, media_ids, tags, name, price FROM public.product_model WHERE id = $1`
+	q := `SELECT id, media_ids, tags, name FROM public.product_model WHERE id = $1`
 
 	row := db.QueryRow(q, id)
 
-	err := row.Scan(&data.ID, &data.MediaIDs, pq.Array(&data.Tags), &data.Name, &data.Price)
+	err := row.Scan(&data.ID, &data.MediaIDs, pq.Array(&data.Tags), &data.Name)
 	if err != nil {
 		fmt.Println(err)
 		return data, err
@@ -218,7 +218,7 @@ func SearchProductModels(query string, tags []string) ([]models.ProductModel, er
 
 	for rows.Next() {
 		var data models.ProductModel
-		err := rows.Scan(&data.ID, &data.MediaIDs, pq.Array(&data.Tags), &data.Name, &data.Price)
+		err := rows.Scan(&data.ID, &data.MediaIDs, pq.Array(&data.Tags), &data.Name)
 		if err != nil {
 			fmt.Println(err)
 			return list, err
@@ -252,7 +252,7 @@ func SuggestProductModels(categories []string) ([]models.ProductModel, error) {
 
 	for rows.Next() {
 		var data models.ProductModel
-		err := rows.Scan(&data.ID, &data.MediaIDs, &data.Tags, &data.Name, &data.Price)
+		err := rows.Scan(&data.ID, &data.MediaIDs, &data.Tags, &data.Name)
 		if err != nil {
 			fmt.Println(err)
 			return list, err

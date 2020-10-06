@@ -57,16 +57,16 @@ func NewOrder(new *models.Order) error {
 		row.Scan(&new)
 	}
 
-	for _, item := range new.OrderItems {
-		err := NewOrderItem(&item)
-		if err != nil {
-			fmt.Println(err)
-			status := "error"
-			new.Status = &status
-			UpdateOrder(*new, *new.ConsultantID, "consultant")
-			return err
-		}
-	}
+	// for _, item := range new.OrderItems {
+	// 	err := NewOrderItem(&item)
+	// 	if err != nil {
+	// 		fmt.Println(err)
+	// 		status := "error"
+	// 		new.Status = &status
+	// 		UpdateOrder(*new, *new.ConsultantID, "consultant")
+	// 		return err
+	// 	}
+	// }
 	return err
 }
 

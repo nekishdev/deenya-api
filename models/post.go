@@ -33,13 +33,14 @@ type PostData struct {
 	IsPublished *bool      `db:"is_published" json:"is_published,omitempty"`
 	CreatedAt   *time.Time `db:"created_at" json:"created_at,omitempty"`
 	ScheduledAt *time.Time `db:"scheduled_at" json:"scheduled_at,omitempty"`
-	Medias      []*Media   `json:"medias,omitempty"` //store array of media src or array of media ids
-	MediaIDs    []*int64   `db:"media_ids" json:"-"`
+
+	MediaIDs []*int64 `db:"media_ids" json:"-"`
 }
 
 type Post struct {
 	PostData
 
+	Medias   []*Media       `json:"medias,omitempty"` //store array of media src or array of media ids
 	Owner    *User          `json:"owner,omitempty"`
 	Comments []*PostComment `json:"comments,omitempty"`
 	//Medias   []Media

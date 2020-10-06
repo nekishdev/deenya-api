@@ -84,7 +84,7 @@ func GetInvoiceBooking(id int64) (models.Booking, error) {
 	var data models.Booking
 	q := `SELECT id, consultant_id, client_id, invoice_id, questionnaire_id, treatment_id, conversation_id, inquiry, tags, created_at, started_at, ended_at, scheduled_at, elapsed, status, is_accepted, is_remote FROM public.booking WHERE invoice_id = $1`
 	row := db.QueryRow(q, id)
-	err := row.Scan(&data.ID, &data.ConsultantID, &data.ClientID, &data.InvoiceID, &data.QuestionnaireID, &data.TreatmentID, &data.ConversationID, &data.Inquiry, pq.Array(&data.Tags), &data.CreatedAt, &data.StartedAt, &data.EndedAt, &data.ScheduledAt, &data.Elapsed, &data.Status, &data.IsAccepted, &data.IsRemote)
+	err := row.Scan(&data.ID, &data.ConsultantID, &data.ClientID, &data.InvoiceID, &data.QuestionnaireID, &data.TreatmentID, &data.ConversationID, &data.Inquiry, pq.Array(&data.Tags), &data.CreatedAt, &data.StartedAt, &data.EndedAt, &data.ScheduledAt, &data.IsAccepted, &data.IsRemote)
 	if err != nil {
 		fmt.Println(err)
 		return data, err

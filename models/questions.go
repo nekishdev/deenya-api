@@ -6,6 +6,7 @@ type QuestionnaireData struct {
 	ID           *int64     `db:"id" json:"id,omitempty"`
 	ConsultantID *int64     `db:"consultant_id" json:"consultant_id,omitempty"`
 	ClientID     *int64     `db:"client_id" json:"client_id,omitempty"`
+	BookingID    *int64     `db:"booking_id" json:"booking_id"`
 	Name         *string    `db:"name" json:"name,omitempty"`
 	CreatedAt    *time.Time `db:"created_at" json:"created_at,omitempty"`
 	UpdatedAt    *time.Time `db:"updated_at" json:"updated_at,omitempty"`

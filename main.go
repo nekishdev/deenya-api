@@ -20,14 +20,14 @@ func main2() {
 	database.Init()
 
 	// database.AvailableBookings(0)
-	now := time.Now().UTC()
-	check := time.Date(now.Year(), now.Month(), now.Day(), now.Hour(), 0, 0, 0, now.Location())
-	fmt.Println(check)
+	// now := time.Now().UTC()
+	// check := time.Date(now.Year(), now.Month(), now.Day(), now.Hour(), 0, 0, 0, now.Location())
+	// fmt.Println(check)
 
-	loc, _ := time.LoadLocation("Asia/Shanghai")
-	check2 := check.In(loc)
-	fmt.Println(check2)
-	panic("test")
+	// loc, _ := time.LoadLocation("Asia/Shanghai")
+	// check2 := check.In(loc)
+	// fmt.Println(check2)
+	// panic("test")
 
 	mid := int64(1)
 	tid := int64(2)
@@ -48,6 +48,10 @@ func main2() {
 		},
 		Before: &ret,
 	}
+
+	_, csv, _ := database.PrepareInsert(data.PortfolioData)
+
+	fmt.Println(csv)
 
 	database.NewPortfolio(&data)
 
@@ -88,18 +92,17 @@ func TransformTime(dt time.Time, tz string) time.Time {
 // @host localhost:3333
 // @BasePath /
 func main() {
-	formatter := "2006-01-02T15:04:05.999Z"
-	js := "2020-08-18T21:17:51.000Z"
-	loc, _ := time.LoadLocation("Australia/Brisbane")
-	// now := time.Now()
-	prs, _ := time.Parse(formatter, js)
+	// formatter := "2006-01-02T15:04:05.999Z"
+	// js := "2020-08-18T21:17:51.000Z"
+	// loc, _ := time.LoadLocation("Australia/Brisbane")
+	// // now := time.Now()
+	// prs, _ := time.Parse(formatter, js)
 
-	test := time.Date(prs.Year(), prs.Month(), prs.Day(), prs.Hour(), prs.Minute(), 0, 0, loc)
-	//test := time.Date(now.Year(), now.Month(), now.Day(), now.Hour(), 0, 0, 0, now.Location)
-	fmt.Println(test.Format(formatter))
-	// for {
+	// test := time.Date(prs.Year(), prs.Month(), prs.Day(), prs.Hour(), prs.Minute(), 0, 0, loc)
+	// //test := time.Date(now.Year(), now.Month(), now.Day(), now.Hour(), 0, 0, 0, now.Location)
+	// fmt.Println(test.Format(formatter))
 
-	// }
+	// panic("test")
 	var err error
 	database.Init()
 

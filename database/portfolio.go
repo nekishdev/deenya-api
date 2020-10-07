@@ -43,10 +43,10 @@ func DeletePortfolio(id int64, uid int64, utype string) error {
 }
 
 func NewPortfolio(new *models.Portfolio) error {
-	_, csv, csvc := PrepareInsert(*new)
+	_, csv, csvc := PrepareInsert(new.PortfolioData)
 	sql := "INSERT INTO public.portfolio" + " (" + csv + ") VALUES (" + csvc + ") RETURNING *"
 
-	row, err := db.NamedQuery(sql, new)
+	row, err := db.NamedQuery(sql, new.PortfolioData)
 	if err != nil {
 		fmt.Println(err)
 	}

@@ -12,12 +12,13 @@ type ClinicData struct {
 	Country  *string  `db:"country" json:"country,omitempty"`
 	Street   *string  `db:"street" json:"street,omitempty"`
 	Postcode *string  `db:"postcode" json:"postcode,omitempty"`
-	Admins   []*int64 `db:"admins" json:"admins,omitempty"`
+	AdminIds []*int64 `db:"admin_ids" json:"admin_ids,omitempty"`
 }
 
 type Clinic struct {
 	ClinicData
-	Consultants []*User `json:"consultants,omitempty"`
+	Admins  []*User `json:"admins,omitempty"`
+	Members []*User `json:"members,omitempty"`
 }
 
 type ClinicMemberData struct {

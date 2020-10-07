@@ -8,6 +8,7 @@ type TreatmentData struct {
 	PortfolioID  *int64    `db:"portfolio_id" json:"portfolio_id,omitempty"`
 	Notes        *string   `db:"notes" json:"notes,omitempty"`
 	Tags         []*string `db:"tags" json:"tags,omitempty"`
+	Steps        []*string `db:"steps" json:"steps,omitempty"`
 	CreatedAt    *int64    `db:"created_at" json:"created_at"`
 }
 

@@ -283,3 +283,12 @@ func SuggestProductModels(w http.ResponseWriter, r *http.Request) {
 
 	WriteAsJSON(w, js)
 }
+
+func NewProductModel(w http.ResponseWriter, r *http.Request) {
+}
+
+func UpdateProductModel(w http.ResponseWriter, r *http.Request) {
+}
+
+func GetProductModel(w http.ResponseWriter, r *http.Request) {
+}

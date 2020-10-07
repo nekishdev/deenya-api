@@ -13,9 +13,9 @@ import (
 
 func GetBooking(id int64, uid int64, utype string) (models.Booking, error) {
 	var data models.Booking
-	q := fmt.Sprintf(`SELECT id, consultant_id, client_id, invoice_id, questionnaire_id, treatment_id, conversation_id, inquiry, tags, created_at, started_at, ended_at, scheduled_at, elapsed, status, is_accepted, is_remote FROM public.booking WHERE id = $1 AND %s_id = $2 LIMIT 1`, utype)
+	q := fmt.Sprintf(`SELECT id, consultant_id, client_id, invoice_id, questionnaire_id, treatment_id, conversation_id, inquiry, tags, created_at, started_at, ended_at, scheduled_at, is_accepted, is_remote FROM public.booking WHERE id = $1 AND %s_id = $2 LIMIT 1`, utype)
 	row := db.QueryRow(q, id, uid)
-	err := row.Scan(&data.ID, &data.ConsultantID, &data.ClientID, &data.InvoiceID, &data.QuestionnaireID, &data.TreatmentID, &data.ConversationID, &data.Inquiry, pq.Array(&data.Tags), &data.CreatedAt, &data.StartedAt, &data.EndedAt, &data.ScheduledAt, &data.Elapsed, &data.Status, &data.IsAccepted, &data.IsRemote)
+	err := row.Scan(&data.ID, &data.ConsultantID, &data.ClientID, &data.InvoiceID, &data.QuestionnaireID, &data.TreatmentID, &data.ConversationID, &data.Inquiry, pq.Array(&data.Tags), &data.CreatedAt, &data.StartedAt, &data.EndedAt, &data.ScheduledAt, &data.IsAccepted, &data.IsRemote)
 	if err != nil {
 		fmt.Println(err)
 		return data, err
@@ -26,7 +26,7 @@ func GetBooking(id int64, uid int64, utype string) (models.Booking, error) {
 
 func UpdateBooking(data models.Booking, utype string) error {
 	var err error
-	umap := StructMap(data)
+	umap := StructMap(data.BookingData)
 	uquery, err := UpString(umap)
 	if err != nil {
 		return err
@@ -53,10 +53,10 @@ func DeleteBooking(id int64, uid int64, utype string) error {
 
 func NewBooking(new *models.Booking) error {
 	var id int64
-	_, csv, csvc := PrepareInsert(*new)
+	_, csv, csvc := PrepareInsert(new.BookingData)
 	sql := "INSERT INTO public.booking" + " (" + csv + ") VALUES (" + csvc + ") RETURNING id"
 
-	row, err := db.NamedQuery(sql, new)
+	row, err := db.NamedQuery(sql, new.BookingData)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -70,7 +70,7 @@ func NewBooking(new *models.Booking) error {
 
 func MyBookings(uid int64, utype string) ([]models.Booking, error) {
 	var list []models.Booking
-	q := fmt.Sprintf(`SELECT id, consultant_id, client_id, invoice_id, questionnaire_id, treatment_id, conversation_id, inquiry, tags, created_at, started_at, ended_at, scheduled_at, elapsed, status, is_accepted, is_remote FROM public.booking WHERE %s_id = $1 ORDER BY scheduled_at DESC`, utype)
+	q := fmt.Sprintf(`SELECT id, consultant_id, client_id, invoice_id, questionnaire_id, treatment_id, conversation_id, inquiry, tags, created_at, started_at, ended_at, scheduled_at, is_accepted, is_remote FROM public.booking WHERE %s_id = $1 ORDER BY scheduled_at DESC`, utype)
 	rows, err := db.Query(q, uid)
 	if err != nil {
 		fmt.Println(err)
@@ -78,7 +78,7 @@ func MyBookings(uid int64, utype string) ([]models.Booking, error) {
 	}
 	for rows.Next() {
 		var data models.Booking
-		err = rows.Scan(&data.ID, &data.ConsultantID, &data.ClientID, &data.InvoiceID, &data.QuestionnaireID, &data.TreatmentID, &data.ConversationID, &data.Inquiry, pq.Array(&data.Tags), &data.CreatedAt, &data.StartedAt, &data.EndedAt, &data.ScheduledAt, &data.Elapsed, &data.Status, &data.IsAccepted, &data.IsRemote)
+		err = rows.Scan(&data.ID, &data.ConsultantID, &data.ClientID, &data.InvoiceID, &data.QuestionnaireID, &data.TreatmentID, &data.ConversationID, &data.Inquiry, pq.Array(&data.Tags), &data.CreatedAt, &data.StartedAt, &data.EndedAt, &data.ScheduledAt, &data.IsAccepted, &data.IsRemote)
 		if err != nil {
 			fmt.Println(err)
 			return list, err
@@ -97,7 +97,7 @@ func UserBookings(mid int64, mtype string, tid int64) ([]models.Booking, error) 
 		ttype = "client"
 	}
 	var list []models.Booking
-	q := fmt.Sprintf(`SELECT id, consultant_id, client_id, invoice_id, questionnaire_id, treatment_id, conversation_id, inquiry, tags, created_at, started_at, ended_at, scheduled_at, elapsed, status, is_accepted, is_remote FROM public.booking WHERE %s_id = $1 AND %s_id = $2 ORDER BY scheduled_at DESC`, mtype, ttype)
+	q := fmt.Sprintf(`SELECT id, consultant_id, client_id, invoice_id, questionnaire_id, treatment_id, conversation_id, inquiry, tags, created_at, started_at, ended_at, scheduled_at, is_accepted, is_remote FROM public.booking WHERE %s_id = $1 AND %s_id = $2 ORDER BY scheduled_at DESC`, mtype, ttype)
 	rows, err := db.Query(q, mid, tid)
 	if err != nil {
 		fmt.Println(err)
@@ -105,7 +105,7 @@ func UserBookings(mid int64, mtype string, tid int64) ([]models.Booking, error) 
 	}
 	for rows.Next() {
 		var data models.Booking
-		err = rows.Scan(&data.ID, &data.ConsultantID, &data.ClientID, &data.InvoiceID, &data.QuestionnaireID, &data.TreatmentID, &data.ConversationID, &data.Inquiry, pq.Array(&data.Tags), &data.CreatedAt, &data.StartedAt, &data.EndedAt, &data.ScheduledAt, &data.Elapsed, &data.Status, &data.IsAccepted, &data.IsRemote)
+		err = rows.Scan(&data.ID, &data.ConsultantID, &data.ClientID, &data.InvoiceID, &data.QuestionnaireID, &data.TreatmentID, &data.ConversationID, &data.Inquiry, pq.Array(&data.Tags), &data.CreatedAt, &data.StartedAt, &data.EndedAt, &data.ScheduledAt, &data.IsAccepted, &data.IsRemote)
 		if err != nil {
 			fmt.Println(err)
 			return list, err

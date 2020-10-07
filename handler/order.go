@@ -153,15 +153,15 @@ func NewOrder(w http.ResponseWriter, r *http.Request) {
 
 	sellers := make(map[int64][]models.OrderItem)
 
-	for _, item := range body.items {
-		_, ok := sellers[*item.SellerID]
+	// for _, item := range body.items {
+	// 	_, ok := sellers[*item.SellerID]
 
-		if !ok {
-			sellers[*item.SellerID] = []models.OrderItem{item}
-			continue
-		}
-		sellers[*item.SellerID] = append(sellers[*item.SellerID], item)
-	}
+	// 	if !ok {
+	// 		sellers[*item.SellerID] = []models.OrderItem{item}
+	// 		continue
+	// 	}
+	// 	sellers[*item.SellerID] = append(sellers[*item.SellerID], item)
+	// }
 	var orders []models.Order
 	for consultant_id, items := range sellers {
 		var data models.Order

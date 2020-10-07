@@ -64,6 +64,12 @@ type UserDetails struct {
 	ProfilePicture   *Media    `json:"profile_picture,omitempty" swaggerignore:"true"`
 }
 
+type UserContact struct {
+	Email   *string
+	Mobile  *string
+	Address *string
+}
+
 type UserFinance struct {
 	StripeAccountID string `json:"stripe_account_id,omitempty"`
 }

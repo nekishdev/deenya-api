@@ -12,6 +12,16 @@ import (
 	"github.com/go-chi/chi"
 )
 
+// GetPost godoc
+// @Summary GetPost
+// @Description GetPost
+// @Tags Post
+// @ID GetPost
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} models.PostData
+// @Failure 400 {object} interface{}
+// @Router /posts [get]
 func GetPost(w http.ResponseWriter, r *http.Request) {
 	var id int64
 	var err error
@@ -52,6 +62,18 @@ func GetPost(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// UpdatePost godoc
+// @Summary UpdatePost
+// @Description UpdatePost
+// @Tags Post
+// @ID UpdatePost
+// @Accept  json
+// @Produce  json
+// @Param postID path int true "Post ID"
+// @Param body body models.PostData true "Post data"
+// @Success 200 {object} models.PostData
+// @Failure 400 {object} interface{}
+// @Router /posts/{postID} [put]
 func UpdatePost(w http.ResponseWriter, r *http.Request) {
 	var data models.Post
 
@@ -84,6 +106,17 @@ func UpdatePost(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// DeletePost godoc
+// @Summary DeletePost
+// @Description DeletePost
+// @Tags Post
+// @ID DeletePost
+// @Accept  json
+// @Produce  json
+// @Param postID path int true "Post ID"
+// @Success 200 {object} models.JsonResultMessage
+// @Failure 400 {object} interface{}
+// @Router /posts/{postID} [delete]
 func DeletePost(w http.ResponseWriter, r *http.Request) {
 	var id int64
 	var err error
@@ -117,9 +150,7 @@ func DeletePost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp := struct {
-		Message string `json:"message"`
-	}{
+	resp := models.JsonResultMessage{
 		Message: "Success",
 	}
 
@@ -133,6 +164,17 @@ func DeletePost(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// NewPost godoc
+// @Summary NewPost
+// @Description NewPost
+// @Tags Post
+// @ID NewPost
+// @Accept  json
+// @Produce  json
+// @Param body body models.PostData true "Post data"
+// @Success 200 {object} models.PostData
+// @Failure 400 {object} interface{}
+// @Router /posts [post]
 func NewPost(w http.ResponseWriter, r *http.Request) {
 	var data models.Post
 
@@ -161,6 +203,17 @@ func NewPost(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// UserPosts godoc
+// @Summary Get user posts by user ID
+// @Description Get user posts by user ID
+// @Tags User
+// @ID get-user-posts-by-id
+// @Accept  json
+// @Produce  json
+// @Param userID path int true "User ID"
+// @Success 200 {array} models.PostData
+// @Failure 400 {object} interface{}
+// @Router /users/{userID}/posts [get]
 func UserPosts(w http.ResponseWriter, r *http.Request) {
 	var err error
 
@@ -190,6 +243,16 @@ func UserPosts(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// MyPosts godoc
+// @Summary MyPosts
+// @Description MyPosts
+// @Tags Post
+// @ID MyPosts
+// @Accept  json
+// @Produce  json
+// @Success 200 {array} models.PostData
+// @Failure 400 {object} interface{}
+// @Router /posts [get]
 func MyPosts(w http.ResponseWriter, r *http.Request) {
 	var err error
 

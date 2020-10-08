@@ -85,7 +85,7 @@ type UserConsultant struct {
 	AvailableFrom *int    `db:"available_from" json:"available_from,omitempty"`
 	AvailableTo   *int    `db:"available_to" json:"available_to,omitempty"`
 	ClinicID      *int64  `db:"clinic_id" json:"clinic_id,omitempty"`
-	Clinic        *Clinic `json:"clinic,omitempty"`
+	Clinic        *Clinic `json:"clinic,omitempty" swaggerignore:"true"`
 }
 
 //get timezone from client

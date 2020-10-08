@@ -12,6 +12,17 @@ import (
 	"github.com/go-chi/chi"
 )
 
+// GetBooking godoc
+// @Summary Get booking by ID
+// @Description Get booking by id
+// @Tags Booking
+// @ID get-booking-by-id
+// @Accept  json
+// @Produce  json
+// @Param bookingID path int true "Booking ID"
+// @Success 200 {object} models.BookingData
+// @Failure 400 {object} interface{}
+// @Router /bookings/{bookingID} [get]
 func GetBooking(w http.ResponseWriter, r *http.Request) {
 	var id int64
 	var err error
@@ -52,6 +63,19 @@ func GetBooking(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// UpdateBooking godoc
+// @Summary Update booking by ID
+// @Description Update booking by id
+// @Tags Booking
+// @ID update-booking-by-id
+// @Accept  json
+// @Produce  json
+// @Security ApiKeyAuth
+// @Param bookingID path int true "Booking ID"
+// @Param body body models.BookingData true "Booking data"
+// @Success 200 {object} models.BookingData
+// @Failure 400 {object} interface{}
+// @Router /bookings/{bookingID} [put]
 func UpdateBooking(w http.ResponseWriter, r *http.Request) {
 	var data models.Booking
 
@@ -92,6 +116,17 @@ func UpdateBooking(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// DeleteBooking godoc
+// @Summary Delete booking by ID
+// @Description Delete booking by id
+// @Tags Booking
+// @ID delete-booking-by-id
+// @Accept  json
+// @Produce  json
+// @Param bookingID path int true "Booking ID"
+// @Success 200 {object} models.JsonResultMessage
+// @Failure 400 {object} interface{}
+// @Router /bookings/{bookingID} [delete]
 func DeleteBooking(w http.ResponseWriter, r *http.Request) {
 	var id int64
 	var err error
@@ -119,9 +154,7 @@ func DeleteBooking(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp := struct {
-		Message string `json:"message"`
-	}{
+	resp := models.JsonResultMessage{
 		Message: "Success",
 	}
 
@@ -135,6 +168,17 @@ func DeleteBooking(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// NewBooking godoc
+// @Summary New booking
+// @Description New booking
+// @Tags Booking
+// @ID new-booking
+// @Accept  json
+// @Produce  json
+// @Param body body models.BookingData true "Booking data"
+// @Success 200 {object} models.BookingData
+// @Failure 400 {object} interface{}
+// @Router /bookings/ [post]
 func NewBooking(w http.ResponseWriter, r *http.Request) {
 	var data models.Booking
 
@@ -201,6 +245,16 @@ func UserBookings(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// MyBookings godoc
+// @Summary My bookings
+// @Description My bookings
+// @Tags Booking
+// @ID my-bookings
+// @Accept  json
+// @Produce  json
+// @Success 200 {array} models.BookingData
+// @Failure 400 {object} interface{}
+// @Router /bookings/ [get]
 func MyBookings(w http.ResponseWriter, r *http.Request) {
 
 	var err error
@@ -259,6 +313,17 @@ func AcceptBooking(w http.ResponseWriter, r *http.Request) {
 	database.UpdateBooking(data, atype)
 }
 
+// AvailableBookings godoc
+// @Summary AvailableBookings
+// @Description AvailableBookings
+// @Tags User
+// @ID available-bookings
+// @Accept  json
+// @Produce  json
+// @Param userID path int true "User ID"
+// @Success 200 {array} integer
+// @Failure 400 {object} interface{}
+// @Router /users/{userID}/available [get]
 func AvailableBookings(w http.ResponseWriter, r *http.Request) {
 	body := struct {
 		tz   string

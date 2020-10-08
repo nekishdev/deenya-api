@@ -46,7 +46,7 @@ func DeleteTreatment(id int64, uid int64, utype string) error {
 }
 
 func NewTreatment(data *models.Treatment) error {
-	_, csv, csvc := PrepareInsert(*data)
+	_, csv, csvc := PrepareInsert(data.TreatmentData)
 	sql := "INSERT INTO public.treatment" + " (" + csv + ") VALUES (" + csvc + ") RETURNING id, consultant_id, client_id, order_id, portfolio_id, notes, tags, created_at"
 
 	row, err := db.NamedQuery(sql, *data)

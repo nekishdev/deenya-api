@@ -137,6 +137,17 @@ func NewForumThread(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// UserForumThreads godoc
+// @Summary Get user threads by user ID
+// @Description Get user threads by user ID
+// @Tags User
+// @ID get-user-threads-by-id
+// @Accept  json
+// @Produce  json
+// @Param userID path int true "User ID"
+// @Success 200 {array} models.ForumThreadData
+// @Failure 400 {object} interface{}
+// @Router /users/{userID}/threads [get]
 func UserForumThreads(w http.ResponseWriter, r *http.Request) {
 	var uid int64
 	var q string

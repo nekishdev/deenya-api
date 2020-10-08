@@ -89,6 +89,10 @@ func TransformTime(dt time.Time, tz string) time.Time {
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
+
 // @host localhost:3333
 // @BasePath /
 func main() {
@@ -180,8 +184,10 @@ func main() {
 			r.Put("/", handler.UpdateBooking)
 			r.Delete("/", handler.DeleteBooking)
 			r.Route("/treatment", func(r chi.Router) {
+				//TODO-Gor doc
 				r.Post("/", handler.NewTreatment)
 			})
+			//TODO-Gor doc
 			r.Route("/questionnaire", func(r chi.Router) {
 				r.Post("/", handler.NewQuestionnaire)
 			})
@@ -430,7 +436,8 @@ func main() {
 	r.Post("/login", handler.Login)
 	r.Post("/register", handler.Register)
 
-	err = http.ListenAndServe(":3334", r)
+	//TODO-Gor get port from env
+	err = http.ListenAndServe(":3333", r)
 	if err != nil {
 		fmt.Println("ListenAndServe:", err)
 	}

@@ -57,8 +57,9 @@ func NewBooking(new *models.Booking) error {
 	sql := "INSERT INTO public.booking" + " (" + csv + ") VALUES (" + csvc + ") RETURNING id"
 
 	row, err := db.NamedQuery(sql, new.BookingData)
+
 	if err != nil {
-		fmt.Println(err)
+		return err
 	}
 	if row.Next() {
 		row.Scan(&id)

@@ -58,19 +58,22 @@ func DeleteProduct(id int64, uid int64) error {
 
 func NewProduct(data *models.Product) error {
 
-	_, csv, csvc := PrepareInsert(*data)
+	_, csv, csvc := PrepareInsert(data.ProductData)
 
 	sql := "INSERT INTO public.product" + " (" + csv + ") VALUES (" + csvc + ") RETURNING *"
 
-	row, err := db.NamedQuery(sql, *data)
+	row, err := db.NamedQuery(sql, data.ProductData)
 	if err != nil {
 		fmt.Println(err)
 		return err
 	}
-	err = row.StructScan(&data)
-	if err != nil {
-		fmt.Println(err)
-		return err
+
+	if row.Next() {
+		err = row.StructScan(&data)
+		if err != nil {
+			fmt.Println(err)
+			return err
+		}
 	}
 
 	return err

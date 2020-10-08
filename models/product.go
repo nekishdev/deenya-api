@@ -27,7 +27,7 @@ type ProductModelData struct {
 	Tags        []*string `json:"tags,omitempty" db:"tags"` //or just tags []string?
 	Name        *string   `json:"name,omitempty" db:"name"`
 	Description *string   `json:"description,omitempty" db:"description"`
-	//Price       *int64    `json:"price,omitempty" db:"price"`
+	Price       *int64    `json:"price,omitempty" db:"price"`
 }
 
 type ProductModel struct {

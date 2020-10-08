@@ -77,6 +77,24 @@ func TransformTime(dt time.Time, tz string) time.Time {
 	return test
 }
 
+// @title Swagger Clinics API
+// @version 1.0
+// @description This is a sample server
+// @termsOfService http://swagger.io/terms/
+
+// @contact.name API Support
+// @contact.url http://www.swagger.io/support
+// @contact.email support@swagger.io
+
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
+
+// @host localhost:3333
+// @BasePath /
 func main() {
 	// formatter := "2006-01-02T15:04:05.999Z"
 	// js := "2020-08-18T21:17:51.000Z"
@@ -166,8 +184,10 @@ func main() {
 			r.Put("/", handler.UpdateBooking)
 			r.Delete("/", handler.DeleteBooking)
 			r.Route("/treatment", func(r chi.Router) {
+				//TODO-Gor doc
 				r.Post("/", handler.NewTreatment)
 			})
+			//TODO-Gor doc
 			r.Route("/questionnaire", func(r chi.Router) {
 				r.Post("/", handler.NewQuestionnaire)
 			})
@@ -190,12 +210,12 @@ func main() {
 		r.Post("/", handler.NewProduct)
 
 		r.Route("/models", func(r chi.Router) {
-			r.Post("/", handler.NewProductModel)
+			//r.Post("/", handler.NewProductModel)
 			r.Get("/search", handler.SearchProductModels)
 			r.Get("/suggest", handler.SuggestProductModels)
 			r.Route("/{modelID}", func(r chi.Router) {
-				r.Put("/", handler.UpdateProductModel)
-				r.Get("/", handler.GetProductModel)
+				//r.Put("/", handler.UpdateProductModel)
+				//r.Get("/", handler.GetProductModel)
 			})
 		})
 
@@ -416,6 +436,7 @@ func main() {
 	r.Post("/login", handler.Login)
 	r.Post("/register", handler.Register)
 
+	//TODO-Gor get port from env
 	err = http.ListenAndServe(":3333", r)
 	if err != nil {
 		fmt.Println("ListenAndServe:", err)

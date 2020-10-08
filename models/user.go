@@ -45,7 +45,7 @@ type UserBase struct {
 	ID        *int64     `json:"id,omitempty" db:"id"`
 	Email     *string    `json:"email,omitempty" db:"email"`
 	Username  *string    `json:"username,omitempty" db:"username"`
-	Password  *string    `json:"-" db:"password"`
+	Password  *string    `json:"password" db:"password"`
 	CreatedAt *time.Time `json:"created_at,omitempty" db:"created_at"`
 	Type      *string    `json:"type,omitempty" db:"type"`
 }
@@ -57,11 +57,11 @@ type UserDetails struct {
 	LastName         *string   `json:"last_name,omitempty" db:"last_name"`
 	Title            *string   `json:"title,omitempty" db:"title"`
 	Gender           *string   `json:"gender,omitempty" db:"gender"`
-	Country          *string   `json:"country,omitempty" db:"country"`
+	Country          *string   `json:"country" db:"country"`
 	City             *string   `json:"city,omitempty" db:"city"`
 	Tags             []*string `json:"tags,omitempty" db:"tags"`         //for identifying user skin types etc for matching with correct products and questionnaires etc
 	Timezone         *string   `json:"timezone,omitempty" db:"timezone"` //or store in user consultant
-	ProfilePicture   *Media    `json:"profile_picture,omitempty"`
+	ProfilePicture   *Media    `json:"profile_picture,omitempty" swaggerignore:"true"`
 }
 
 type UserContact struct {
@@ -85,7 +85,7 @@ type UserConsultant struct {
 	AvailableFrom *int    `db:"available_from" json:"available_from,omitempty"`
 	AvailableTo   *int    `db:"available_to" json:"available_to,omitempty"`
 	ClinicID      *int64  `db:"clinic_id" json:"clinic_id,omitempty"`
-	Clinic        *Clinic `json:"clinic,omitempty"`
+	Clinic        *Clinic `json:"clinic,omitempty" swaggerignore:"true"`
 }
 
 //get timezone from client

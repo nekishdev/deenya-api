@@ -2,10 +2,11 @@ package models
 
 import "time"
 
+// @Required ConsultantID
 type BookingData struct {
 	ID              *int64 `db:"id" json:"id,omitempty"`
-	ConsultantID    *int64 `db:"consultant_id" json:"consultant_id,omitempty"`
-	ClientID        *int64 `db:"client_id" json:"client_id,omitempty"`
+	ConsultantID    *int64 `db:"consultant_id" json:"consultant_id,omitempty" swaggertype:"integer,required"`
+	ClientID        *int64 `db:"client_id" json:"client_id,omitempty" example:"43"`
 	InvoiceID       *int64 `db:"invoice_id" json:"invoice_id,omitempty"` //need to check if invoice is null on frontend?
 	QuestionnaireID *int64 `db:"questionnaire_id" json:"questionnaire_id,omitempty"`
 	TreatmentID     *int64 `db:"treatment_id" json:"treatment_id,omitempty"`
@@ -16,11 +17,11 @@ type BookingData struct {
 	CreatedAt   *time.Time `db:"created_at" json:"created_at,omitempty"`
 	StartedAt   *time.Time `db:"started_at" json:"started_at,omitempty"`
 	EndedAt     *time.Time `db:"ended_at" json:"ended_at,omitempty"`
-	ScheduledAt *time.Time `db:"scheduled_at" json:"scheduled_at,omitempty"`
-	//Elapsed     *int64     `db:"elapsed" json:"elapsed,omitempty"`
-	//Status     *string `db:"status" json:"status,omitempty"`
-	IsAccepted *bool `db:"is_accepted" json:"is_accepted,omitempty"`
-	IsRemote   *bool `db:"is_remote" json:"is_remote,omitempty"`
+	ScheduledAt *time.Time `db:"scheduled_at" json:"scheduled_at"`
+	Elapsed     *int64     `db:"elapsed" json:"elapsed,omitempty"`
+	Status      *string    `db:"status" json:"status,omitempty"`
+	IsAccepted  *bool      `db:"is_accepted" json:"is_accepted,omitempty"`
+	IsRemote    *bool      `db:"is_remote" json:"is_remote,omitempty"`
 }
 
 type Booking struct {

@@ -10,6 +10,17 @@ import (
 	"github.com/go-chi/chi"
 )
 
+// GetTreatment godoc
+// @Summary Get treatment by ID
+// @Description Get treatment by id
+// @Tags Treatment
+// @ID get-treatment-by-id
+// @Accept  json
+// @Produce  json
+// @Param treatmentID path int true "Treatment ID"
+// @Success 200 {object} models.TreatmentData
+// @Failure 400 {object} interface{}
+// @Router /treatments/{treatmentID} [get]
 func GetTreatment(w http.ResponseWriter, r *http.Request) {
 	var id int64
 	var err error
@@ -41,6 +52,18 @@ func GetTreatment(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// UpdateTreatment godoc
+// @Summary Update Treatment by ID
+// @Description Update Treatment by id
+// @Tags Treatment
+// @ID update-treatment-by-id
+// @Accept  json
+// @Produce  json
+// @Param treatmentID path int true "Treatment ID"
+// @Param body body models.TreatmentData true "Treatment data"
+// @Success 200 {object} models.TreatmentData
+// @Failure 400 {object} interface{}
+// @Router /treatments/{treatmentID} [put]
 func UpdateTreatment(w http.ResponseWriter, r *http.Request) {
 	var data models.Treatment
 
@@ -87,6 +110,17 @@ func UpdateTreatment(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// DeleteTreatment godoc
+// @Summary Delete Treatment by ID
+// @Description Delete Treatment by id
+// @Tags Treatment
+// @ID delete-treatment-by-id
+// @Accept  json
+// @Produce  json
+// @Param treatmentID path int true "Treatment ID"
+// @Success 200 {object} models.JsonResultMessage
+// @Failure 400 {object} interface{}
+// @Router /treatments/{treatmentID} [delete]
 func DeleteTreatment(w http.ResponseWriter, r *http.Request) {
 	var id int64
 	var err error
@@ -111,9 +145,7 @@ func DeleteTreatment(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp := struct {
-		Message string `json:"message"`
-	}{
+	resp := models.JsonResultMessage{
 		Message: "Success",
 	}
 
@@ -166,6 +198,16 @@ func NewTreatment(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// MyTreatments godoc
+// @Summary My treatments
+// @Description My treatments
+// @Tags Treatment
+// @ID my-treatments
+// @Accept  json
+// @Produce  json
+// @Success 200 {array} models.TreatmentData
+// @Failure 400 {object} interface{}
+// @Router /treatments/ [get]
 func MyTreatments(w http.ResponseWriter, r *http.Request) {
 
 	aid := GetAuthID(r)

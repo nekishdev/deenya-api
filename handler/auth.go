@@ -25,6 +25,17 @@ func Verify(w http.ResponseWriter, r *http.Request) {
 	panic(auth)
 }
 
+// Register
+// @Summary Register
+// @Description Register user
+// @Tags Auth
+// @ID auth-register
+// @Accept  json
+// @Produce  json
+// @Param body body models.UserData true "User data"
+// @Success 200 {object} models.UserData
+// @Failure 400 {object} interface{}
+// @Router /register [post]
 func Register(w http.ResponseWriter, r *http.Request) {
 	// body := struct {
 	// 	User models.User `json:"user"`
@@ -83,11 +94,19 @@ func Register(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// Login
+// @Summary Login
+// @Description Login user
+// @Tags Auth
+// @ID login-register
+// @Accept  json
+// @Produce  json
+// @Param body body models.LoginData true "Login data"
+// @Success 200 {object} JwtToken
+// @Failure 400 {object} interface{}
+// @Router /login [post]
 func Login(w http.ResponseWriter, r *http.Request) {
-	input := struct {
-		Username string
-		Password string
-	}{}
+	input := models.LoginData{}
 
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&input); err != nil {

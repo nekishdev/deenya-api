@@ -152,6 +152,17 @@ func NewProduct(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// UserProducts godoc
+// @Summary Get user products by user ID
+// @Description Get user products by user ID
+// @Tags User
+// @ID get-user-products-by-id
+// @Accept  json
+// @Produce  json
+// @Param userID path int true "User ID"
+// @Success 200 {array} models.ProductData
+// @Failure 400 {object} interface{}
+// @Router /users/{userID}/products [get]
 func UserProducts(w http.ResponseWriter, r *http.Request) {
 	var id int64
 	var err error

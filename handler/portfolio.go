@@ -154,6 +154,17 @@ func NewPortfolio(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// UserPortfolios godoc
+// @Summary Get user portfolios by user ID
+// @Description Get user portfolios by user ID
+// @Tags User
+// @ID get-user-portfolios-by-id
+// @Accept  json
+// @Produce  json
+// @Param userID path int true "User ID"
+// @Success 200 {array} models.PortfolioData
+// @Failure 400 {object} interface{}
+// @Router /users/{userID}/portfolios [get]
 func UserPortfolios(w http.ResponseWriter, r *http.Request) {
 	var uid int64
 	var err error

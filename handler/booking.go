@@ -175,7 +175,7 @@ func DeleteBooking(w http.ResponseWriter, r *http.Request) {
 // @ID new-booking
 // @Accept  json
 // @Produce  json
-// @Param body body models.BookingData true "Booking data"
+// @Param body body models.BookingData true "Booking"
 // @Success 200 {object} models.BookingData
 // @Failure 400 {object} interface{}
 // @Router /bookings/ [post]
@@ -285,6 +285,16 @@ func MyBookings(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// AcceptBooking godoc
+// @Summary Allows a consultant to accept a booking request
+// @Description Allows a consultant to accept a booking request
+// @Tags Booking
+// @ID accept-booking
+// @Accept  json
+// @Produce  json
+// @Success 200 {array} models.BookingData
+// @Failure 400 {object} interface{}
+// @Router /booking/{bookingID}/accept [get]
 func AcceptBooking(w http.ResponseWriter, r *http.Request) {
 	var data models.Booking
 

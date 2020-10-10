@@ -10,6 +10,18 @@ import (
 	"github.com/go-chi/chi"
 )
 
+// GetForumThread godoc
+// @Summary Get forum thread object by ID
+// @Description Get forum thread object by ID
+// @Tags Forum Thread
+// @ID forum-thread-get
+// @Accept  json
+// @Produce  json
+// @Param id path int true "Forum Thread ID"
+// @Success 200 {object} models.ForumThreadData
+// @Failure 400 {object} interface{}
+// @Router /forum/{id} [get]
+// @Security Basic
 func GetForumThread(w http.ResponseWriter, r *http.Request) {
 	var id int64
 	var err error
@@ -41,6 +53,19 @@ func GetForumThread(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// UpdateForumThread godoc
+// @Summary Update forum thread object
+// @Description Update forum thread object
+// @Tags Forum Thread
+// @ID forum-thread-update
+// @Accept  json
+// @Produce  json
+// @Param id path int true "Forum Thread ID"
+// @Param forum-thread body models.ForumThreadData true "Forum Thread"
+// @Success 200 {object} models.ForumThreadData
+// @Failure 400 {object} interface{}
+// @Router /forum/{id} [put]
+// @Security Basic
 func UpdateForumThread(w http.ResponseWriter, r *http.Request) {
 	var data models.ForumThread
 

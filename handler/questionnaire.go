@@ -4,16 +4,39 @@ import (
 	"deenya-api/database"
 	"deenya-api/models"
 	"net/http"
-	"strconv"
 
 	"github.com/clarketm/json"
-	"github.com/go-chi/chi"
 )
 
+// GetQuestionnaire godoc
+// @Summary Get questionnaire object by ID
+// @Description Get questionnaire object by ID
+// @Tags User
+// @ID questionnaire-get
+// @Accept  json
+// @Produce  json
+// @Param questionnaireID path int true "Questionnaire ID"
+// @Success 200 {object} models.QuestionnaireData
+// @Failure 400 {object} interface{}
+// @Router /questionnaires/{questionnaireID} [get]
+// @Security Basic
 func GetQuestionnaire(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// UpdateQuestionnaire godoc
+// @Summary Update questionnaire object
+// @Description Update questionnaire object
+// @Tags User
+// @ID questionnaire-update
+// @Accept  json
+// @Produce  json
+// @Param questionnaireID path int true "Questionnaire ID"
+// @Param body body models.QuestionnaireData true "Questionnaire Object"
+// @Success 200 {object} models.QuestionnaireData
+// @Failure 400 {object} interface{}
+// @Router /questionnaires/{questionnaireID} [post]
+// @Security Basic
 func UpdateQuestionnaire(w http.ResponseWriter, r *http.Request) {
 
 	var data models.Questionnaire
@@ -43,63 +66,36 @@ func UpdateQuestionnaire(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// DeleteQuestionnaire godoc
+// @Summary Delete questionnaire object
+// @Description Delete questionnaire object
+// @Tags User
+// @ID questionnaire-delete
+// @Accept  json
+// @Produce  json
+// @Param questionnaireID path int true "Questionnaire ID"
+// @Success 200 {object} models.JsonResultMessage
+// @Failure 400 {object} interface{}
+// @Router /questionnaires/{questionnaireID} [put]
+// @Security Basic
 func DeleteQuestionnaire(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// NewQuestionnaire godoc
+// @Summary Create a new questionnaire object for a booking
+// @Description Create a new questionnaire object for a booking
+// @Tags User
+// @ID questionnaire-new
+// @Accept  json
+// @Produce  json
+// @Param bookingID path int true "Booking ID"
+// @Param body body models.QuestionnaireData true "Questionnaire Object"
+// @Success 200 {object} models.QuestionnaireData
+// @Failure 400 {object} interface{}
+// @Router /{bookingID}/questionnaire [post]
+// @Security Basic
 func NewQuestionnaire(w http.ResponseWriter, r *http.Request) {
-
-}
-
-func UserQuestionnaires(w http.ResponseWriter, r *http.Request) {
-
-	q := chi.URLParam(r, "userID")
-
-	id, err := strconv.ParseInt(q, 10, 64)
-
-	mid := GetAuthID(r)
-	mtype := GetAuthType(r)
-
-	data, err := database.UserQuestionnaires(mid, mtype, id)
-
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
-	js, err := json.Marshal(data)
-
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(js)
-
-}
-
-func MyQuestionnaires(w http.ResponseWriter, r *http.Request) {
-
-	mid := GetAuthID(r)
-	mtype := GetAuthType(r)
-
-	data, err := database.MyQuestionnaires(mid, mtype)
-
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
-	js, err := json.Marshal(data)
-
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(js)
 
 }
 
@@ -107,6 +103,19 @@ func GetQuestion(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// UpdateQuestion godoc
+// @Summary Update question object
+// @Description Update question object
+// @Tags User
+// @ID question-update
+// @Accept  json
+// @Produce  json
+// @Param questionnaireID path int true "Questionnaire ID"
+// @Param body body models.QuestionData true "Question Object"
+// @Success 200 {object} models.QuestionData
+// @Failure 400 {object} interface{}
+// @Router /questionnaires/{questionnaireID} [post]
+// @Security Basic
 func UpdateQuestion(w http.ResponseWriter, r *http.Request) {
 	var data models.Question
 
@@ -129,34 +138,36 @@ func UpdateQuestion(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// DeleteQuestion godoc
+// @Summary Delete a question object
+// @Description Delete a question object
+// @Tags User
+// @ID question-delete
+// @Accept  json
+// @Produce  json
+// @Param questionnaireID path int true "Questionnaire ID"
+// @Param questionID path int true "Question ID"
+// @Success 200 {object} models.JsonResultMessage
+// @Failure 400 {object} interface{}
+// @Router /questionnaires/{questionnaireID}/{questionID} [delete]
+// @Security Basic
 func DeleteQuestion(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// NewQuestion godoc
+// @Summary Create new question object for a questionnaire
+// @Description Create new question object for a questionnaire
+// @Tags User
+// @ID question-new
+// @Accept  json
+// @Produce  json
+// @Param questionnaireID path int true "Questionnaire ID"
+// @Param body body models.QuestionData true "Question Object"
+// @Success 200 {object} models.QuestionData
+// @Failure 400 {object} interface{}
+// @Router /questionnaires/{questionnaireID}/ [post]
+// @Security Basic
 func NewQuestion(w http.ResponseWriter, r *http.Request) {
 
 }
-
-// func ListQuestions(w http.ResponseWriter, r *http.Request) {
-// 	q := chi.URLParam(r, "questionnaireID")
-
-// 	id, err := strconv.ParseInt(q, 10, 64)
-
-// 	data, err := database.ListQuestions(id)
-
-// 	if err != nil {
-// 		http.Error(w, err.Error(), http.StatusBadRequest)
-// 		return
-// 	}
-
-// 	js, err := json.Marshal(data)
-
-// 	if err != nil {
-// 		http.Error(w, err.Error(), http.StatusBadRequest)
-// 		return
-// 	}
-
-// 	w.Header().Set("Content-Type", "application/json")
-// 	w.Write(js)
-
-// }

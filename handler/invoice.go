@@ -19,7 +19,7 @@ import (
 // @Produce  json
 // @Success 200 {array} models.InvoiceData
 // @Failure 400 {object} interface{}
-// @Router /clinics/finance/invoices [get]
+// @Router /finance/invoices [get]
 func MyInvoices(w http.ResponseWriter, r *http.Request) {
 	// err := GetAuthID(r)
 
@@ -57,7 +57,7 @@ func MyInvoices(w http.ResponseWriter, r *http.Request) {
 // @Param invoiceID path int true "Invoice ID"
 // @Success 200 {object} models.InvoiceData
 // @Failure 400 {object} interface{}
-// @Router /clinics/finance/{invoiceID} [get]
+// @Router /finance/{invoiceID} [get]
 func GetInvoice(w http.ResponseWriter, r *http.Request) {
 	q := chi.URLParam(r, "invoiceID")
 
@@ -107,7 +107,7 @@ func GetInvoice(w http.ResponseWriter, r *http.Request) {
 // @Param body body models.InvoiceData true "Invoice data"
 // @Success 200 {object} models.InvoiceData
 // @Failure 400 {object} interface{}
-// @Router /clinics/finance/{invoiceID} [put]
+// @Router /finance/{invoiceID} [put]
 func UpdateInvoice(w http.ResponseWriter, r *http.Request) {
 	var data models.Invoice
 	decoder := json.NewDecoder(r.Body)
@@ -141,7 +141,7 @@ func UpdateInvoice(w http.ResponseWriter, r *http.Request) {
 // @Param body body models.InvoiceData true "Invoice data"
 // @Success 200 {object} models.InvoiceData
 // @Failure 400 {object} interface{}
-// @Router /clinics/finance/invoices [post]
+// @Router /finance/invoices [post]
 func NewInvoice(w http.ResponseWriter, r *http.Request) {
 	var data models.Invoice
 	decoder := json.NewDecoder(r.Body)

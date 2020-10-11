@@ -100,10 +100,10 @@ func UserOrders(mid int64, mtype string, tid int64) ([]models.Order, error) {
 
 func NewOrderItem(new *models.OrderItem) error {
 
-	_, csv, csvc := PrepareInsert(*new)
+	_, csv, csvc := PrepareInsert(new.OrderItemData)
 	sql := "INSERT INTO public.order_item" + " (" + csv + ") VALUES (" + csvc + ") RETURNING *"
 
-	row, err := db.NamedQuery(sql, new)
+	row, err := db.NamedQuery(sql, new.OrderItemData)
 	if err != nil {
 		fmt.Println(err)
 	}

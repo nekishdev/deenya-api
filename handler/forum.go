@@ -10,16 +10,18 @@ import (
 	"github.com/go-chi/chi"
 )
 
-// @Summary GetForumThread
-// @Description GetForumThread
-// @Tags Forum
-// @ID GetForumThread
+// GetForumThread godoc
+// @Summary Get forum thread object by ID
+// @Description Get forum thread object by ID
+// @Tags Forum Thread
+// @ID forum-thread-get
 // @Accept  json
 // @Produce  json
-// @Param threadID path int true "Thread id"
+// @Param id path int true "Forum Thread ID"
 // @Success 200 {object} models.ForumThreadData
 // @Failure 400 {object} interface{}
-// @Router /forum/{threadID} [get]
+// @Router /forum/{id} [get]
+// @Security Basic
 func GetForumThread(w http.ResponseWriter, r *http.Request) {
 	var id int64
 	var err error
@@ -51,17 +53,19 @@ func GetForumThread(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
-// @Summary UpdateForumThread
-// @Description UpdateForumThread
-// @Tags Forum
-// @ID UpdateForumThread
+// UpdateForumThread godoc
+// @Summary Update forum thread object
+// @Description Update forum thread object
+// @Tags Forum Thread
+// @ID forum-thread-update
 // @Accept  json
 // @Produce  json
-// @Param threadID path int true "Thread id"
-// @Param body body models.ForumThreadData true "Thread data"
+// @Param id path int true "Forum Thread ID"
+// @Param forum-thread body models.ForumThreadData true "Forum Thread"
 // @Success 200 {object} models.ForumThreadData
 // @Failure 400 {object} interface{}
-// @Router /forum/{threadID} [put]
+// @Router /forum/{id} [put]
+// @Security Basic
 func UpdateForumThread(w http.ResponseWriter, r *http.Request) {
 	var data models.ForumThread
 

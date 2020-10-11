@@ -63,10 +63,10 @@ func GetPost(w http.ResponseWriter, r *http.Request) {
 }
 
 // UpdatePost godoc
-// @Summary UpdatePost
-// @Description UpdatePost
+// @Summary Update a post object
+// @Description Update a post object
 // @Tags Post
-// @ID UpdatePost
+// @ID post-update
 // @Accept  json
 // @Produce  json
 // @Param postID path int true "Post ID"
@@ -165,10 +165,10 @@ func DeletePost(w http.ResponseWriter, r *http.Request) {
 }
 
 // NewPost godoc
-// @Summary NewPost
-// @Description NewPost
+// @Summary Create a new post object
+// @Description Create a new post object
 // @Tags Post
-// @ID NewPost
+// @ID post-new
 // @Accept  json
 // @Produce  json
 // @Param body body models.PostData true "Post data"
@@ -204,10 +204,10 @@ func NewPost(w http.ResponseWriter, r *http.Request) {
 }
 
 // UserPosts godoc
-// @Summary Get user posts by user ID
-// @Description Get user posts by user ID
+// @Summary Get user post objects by user ID
+// @Description Get user post objects by user ID
 // @Tags User
-// @ID get-user-posts-by-id
+// @ID user-posts
 // @Accept  json
 // @Produce  json
 // @Param userID path int true "User ID"
@@ -244,10 +244,10 @@ func UserPosts(w http.ResponseWriter, r *http.Request) {
 }
 
 // MyPosts godoc
-// @Summary MyPosts
-// @Description MyPosts
+// @Summary Get a user's own post objects
+// @Description Get a user's own post objects
 // @Tags Post
-// @ID MyPosts
+// @ID my-posts
 // @Accept  json
 // @Produce  json
 // @Success 200 {array} models.PostData

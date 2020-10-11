@@ -11,6 +11,17 @@ import (
 	"github.com/go-chi/chi"
 )
 
+// GetOrder godoc
+// @Summary Get order object
+// @Description Get order object
+// @Tags Order
+// @ID order-get
+// @Accept  json
+// @Produce  json
+// @Param id path int true "Order ID"
+// @Success 200 {object} models.OrderData
+// @Failure 400 {object} interface{}
+// @Router /orders/{orderID} [get]
 func GetOrder(w http.ResponseWriter, r *http.Request) {
 	var data models.Order
 	var id int64
@@ -52,6 +63,18 @@ func GetOrder(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// UpdateOrder godoc
+// @Summary Update order object
+// @Description Update order object
+// @Tags Order
+// @ID order-get
+// @Accept  json
+// @Produce  json
+// @Param id path int true "Order ID"
+// @Param order body model.OrderData true "Update order"
+// @Success 200 {object} models.OrderData
+// @Failure 400 {object} interface{}
+// @Router /orders/{orderID} [put]
 func UpdateOrder(w http.ResponseWriter, r *http.Request) {
 	var data models.Order
 	var err error
@@ -84,44 +107,6 @@ func UpdateOrder(w http.ResponseWriter, r *http.Request) {
 
 }
 
-// func DeleteOrder(w http.ResponseWriter, r *http.Request) {
-// 	var id int64
-// 	var err error
-// 	var q string
-
-// 	q = chi.URLParam(r, "orderID")
-
-// 	id, err = strconv.ParseInt(q, 10, 64)
-
-// 	if err != nil {
-// 		fmt.Println(err)
-// 	}
-
-// 	err = database.DeleteOrder(id)
-
-// 	if err != nil {
-// 		http.Error(w, err.Error(), http.StatusBadRequest)
-// 		return
-// 	}
-
-// 	msg := struct {
-// 		Message string
-// 	}{
-// 		Message: "Success",
-// 	}
-
-// 	js, err := json.Marshal(msg)
-
-// 	if err != nil {
-// 		http.Error(w, err.Error(), http.StatusBadRequest)
-// 		return
-// 	}
-
-// 	w.Header().Set("Content-Type", "application/json")
-// 	w.Write(js)
-
-// }
-
 // func GetDiscountSecret(w http.ResponseWriter, r *http.Request) {
 
 // 	key, err := database.GetDiscountKey(uid, discount, consultant_id)
@@ -137,6 +122,18 @@ func UpdateOrder(w http.ResponseWriter, r *http.Request) {
 // 	// /w.Write(js)
 // }
 
+// NewOrder godoc
+// @Summary Update order object
+// @Description Update order object
+// @Tags Order
+// @ID order-get
+// @Accept  json
+// @Produce  json
+// @Param id path int true "Order ID"
+// @Param order body model.OrderData true "Update order"
+// @Success 200 {object} models.OrderData
+// @Failure 400 {object} interface{}
+// @Router /orders/{orderID} [put]
 func NewOrder(w http.ResponseWriter, r *http.Request) {
 	body := struct {
 		items        []models.OrderItem

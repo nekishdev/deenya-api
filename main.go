@@ -120,6 +120,22 @@ func main() {
 
 	handler.TokenAuth = jwtauth.New("HS256", []byte("secret123"), nil)
 
+	r.Route("/consultants", func(r chi.Router) {
+		r.Group(func(r chi.Router) {
+			r.Use(jwtauth.Verifier(handler.TokenAuth))
+			r.Use(jwtauth.Authenticator)
+			r.Get("/", handler.MyConsultants)
+		})
+	})
+
+	r.Route("/clients", func(r chi.Router) {
+		r.Group(func(r chi.Router) {
+			r.Use(jwtauth.Verifier(handler.TokenAuth))
+			r.Use(jwtauth.Authenticator)
+			r.Get("/", handler.MyClients)
+		})
+	})
+
 	r.Route("/users", func(r chi.Router) {
 		//paginate?
 		r.Get("/search", handler.SearchUsers)
@@ -295,8 +311,6 @@ func main() {
 	r.Route("/questionnaires", func(r chi.Router) {
 		r.Use(jwtauth.Verifier(handler.TokenAuth))
 		r.Use(jwtauth.Authenticator)
-
-		r.Get("/", handler.MyQuestionnaires)
 		r.Post("/", handler.NewQuestionnaire)
 
 		r.Route("/{questionnaireID}", func(r chi.Router) {
@@ -314,11 +328,8 @@ func main() {
 
 	r.Route("/forum", func(r chi.Router) {
 
-		r.Get("/feed", handler.FeedForumThreads) //universal forum feed
-
-		//TODO-Gor implement logic
+		r.Get("/feed", handler.FeedForumThreads)     //universal forum feed
 		r.Get("/search", handler.SearchForumThreads) // search forum threads
-
 		r.Group(func(r chi.Router) {
 			r.Use(jwtauth.Verifier(handler.TokenAuth))
 			r.Use(jwtauth.Authenticator)
@@ -373,64 +384,61 @@ func main() {
 				r.Get("/remove", handler.RemoveClinicMember)
 			})
 		})
+	})
 
-		r.Route("/finance", func(r chi.Router) {
-			r.Use(jwtauth.Verifier(handler.TokenAuth))
-			r.Use(jwtauth.Authenticator)
-			r.Get("/invoices", handler.MyInvoices)
-			r.Post("/invoices", handler.NewInvoice)
+	r.Route("/finance", func(r chi.Router) {
+		r.Use(jwtauth.Verifier(handler.TokenAuth))
+		r.Use(jwtauth.Authenticator)
+		r.Get("/invoices", handler.MyInvoices)
+		r.Post("/invoices", handler.NewInvoice)
 
-			r.Route("/{invoiceID}", func(r chi.Router) {
-				r.Get("/", handler.GetInvoice)
-				r.Put("/", handler.UpdateInvoice)
-				// r.Post("/pay", handler.PayInvoice)
-			})
-
-			//TODO-Gor implement logic
-			r.Route("/stripe", func(r chi.Router) {
-				r.Route("/{customerID}", func(r chi.Router) {
-					r.Get("/", handler.GetCustomer)
-					r.Post("/", handler.NewCustomer)
-					r.Put("/", handler.UpdateCustomer)
-					r.Delete("/", handler.DeleteCustomer)
-				})
-				// r.Route("/connect", func(r chi.Router) {
-				// 	r.Route("{connectID}", func(r chi.Router) {
-
-				// 	})
-				// 	r.Get("/", handler.GetStripeConnect)
-				// 	r.Get("/", handler.NewStripeConnect)
-				// 	r.Get("/", handler.UpdateStripeConnect)
-				// 	r.Get("/", handler.GetStripeConnect)
-				// 	r.Route("/payout", func(r chi.Router) {
-				// 		r.Get("/", handler.GetStripeConnectPayout)
-				// 		r.Get("/", handler.NewStripeConnectPayout)
-				// 		r.Get("/", handler.UpdateStripeConnectPayout)
-				// 		r.Get("/", handler.DeleteStripeConnectPayout)
-				// 	})
-				// })
-			})
-			//add card
-			//update card
-			//get list of cards
-			//add bank account
-			//update bank
-			//integrate stripe
-			r.Route("/geo", func(r chi.Router) {
-				// r.Route("countries", handler.GetCountriesAndRegions)
-			})
+		r.Route("/{invoiceID}", func(r chi.Router) {
+			r.Get("/", handler.GetInvoice)
+			r.Put("/", handler.UpdateInvoice)
+			// r.Post("/pay", handler.PayInvoice)
 		})
 
-		//TODO-Gor implement logic
-		r.Route("/search", func(r chi.Router) {
-			//paginate?
-			r.Get("/consultants", handler.SearchConsultants) //query, distance
-			r.Get("/posts", handler.SearchPosts)
-			r.Get("/portfolios", handler.SearchPortfolios)
-			r.Get("/products", handler.SearchProducts)
-			r.Get("/clinics", handler.SearchClinics)
-		})
+		r.Route("/stripe", func(r chi.Router) {
+			r.Route("/{customerID}", func(r chi.Router) {
+				r.Get("/", handler.GetCustomer)
+				r.Post("/", handler.NewCustomer)
+				r.Put("/", handler.UpdateCustomer)
+				r.Delete("/", handler.DeleteCustomer)
+			})
+			// r.Route("/connect", func(r chi.Router) {
+			// 	r.Route("{connectID}", func(r chi.Router) {
 
+			// 	})
+			// 	r.Get("/", handler.GetStripeConnect)
+			// 	r.Get("/", handler.NewStripeConnect)
+			// 	r.Get("/", handler.UpdateStripeConnect)
+			// 	r.Get("/", handler.GetStripeConnect)
+			// 	r.Route("/payout", func(r chi.Router) {
+			// 		r.Get("/", handler.GetStripeConnectPayout)
+			// 		r.Get("/", handler.NewStripeConnectPayout)
+			// 		r.Get("/", handler.UpdateStripeConnectPayout)
+			// 		r.Get("/", handler.DeleteStripeConnectPayout)
+			// 	})
+			// })
+		})
+		//add card
+		//update card
+		//get list of cards
+		//add bank account
+		//update bank
+		//integrate stripe
+		r.Route("/geo", func(r chi.Router) {
+			// r.Route("countries", handler.GetCountriesAndRegions)
+		})
+	})
+
+	r.Route("/search", func(r chi.Router) {
+		//paginate?
+		r.Get("/consultants", handler.SearchConsultants) //query, distance
+		r.Get("/posts", handler.SearchPosts)
+		r.Get("/portfolios", handler.SearchPortfolios)
+		r.Get("/products", handler.SearchProducts)
+		r.Get("/clinics", handler.SearchClinics)
 	})
 
 	r.Post("/login", handler.Login)

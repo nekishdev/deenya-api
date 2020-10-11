@@ -11,6 +11,19 @@ import (
 	"github.com/go-chi/chi"
 )
 
+// GetPortfolio godoc
+// @Summary Get portfolio by ID
+// @Description Get portfolio by ID
+// @Tags Portfolio
+// @ID portfolio-get
+// @Accept  json
+// @Produce  json
+// @Security Basic
+// @Param portfolioID path int true "Portfolio ID"
+// @Success 200 {object} models.PortfolioData
+// @Failure 400 {object} interface{}
+// @Router /portfolios/{portfolioID} [get]
+
 func GetPortfolio(w http.ResponseWriter, r *http.Request) {
 	var id int64
 	var err error
@@ -41,6 +54,20 @@ func GetPortfolio(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
 }
+
+// UpdatePortfolio godoc
+// @Summary Update portfolio object
+// @Description Update portfolio object
+// @Tags Portfolio
+// @ID portfolio-update
+// @Accept  json
+// @Produce  json
+// @Security Basic
+// @Param portfolioID path int true "Portfolio ID"
+// @Param body body models.PortfolioData true "Portfolio data"
+// @Success 200 {object} models.PortfolioData
+// @Failure 400 {object} interface{}
+// @Router /portfolios/{portfolioID} [put]
 
 func UpdatePortfolio(w http.ResponseWriter, r *http.Request) {
 	var data models.Portfolio
@@ -74,6 +101,19 @@ func UpdatePortfolio(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
 }
+
+// DeletePortfolio godoc
+// @Summary Delete portfolio object
+// @Description Delete portfolio object
+// @Tags Portfolio
+// @ID portfolio-delete
+// @Accept  json
+// @Produce  json
+// @Security Basic
+// @Param portfolioID path int true "Portfolio ID"
+// @Success 200 {object} JsonResultMessage
+// @Failure 400 {object} interface{}
+// @Router /portfolios/{portfolioID} [delete]
 
 func DeletePortfolio(w http.ResponseWriter, r *http.Request) {
 	var id int64
@@ -114,6 +154,19 @@ func DeletePortfolio(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
 }
+
+// NewPortfolio godoc
+// @Summary Create portfolio object
+// @Description Create portfolio object
+// @Tags Portfolio
+// @ID portfolio-new
+// @Accept  json
+// @Produce  json
+// @Security Basic
+// @Param body body models.PortfolioData true "Portfolio data"
+// @Success 200 {object} models.PortfolioData
+// @Failure 400 {object} interface{}
+// @Router /portfolios [post]
 
 func NewPortfolio(w http.ResponseWriter, r *http.Request) {
 	var data models.Portfolio
@@ -157,8 +210,8 @@ func NewPortfolio(w http.ResponseWriter, r *http.Request) {
 // UserPortfolios godoc
 // @Summary Get user portfolios by user ID
 // @Description Get user portfolios by user ID
-// @Tags User
-// @ID get-user-portfolios-by-id
+// @Tags User Portfolio
+// @ID user-portfolios
 // @Accept  json
 // @Produce  json
 // @Param userID path int true "User ID"
@@ -216,6 +269,18 @@ func UserPortfolios(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
 }
+
+// MyPortfolios godoc
+// @Summary Get a user's own portfolio objects
+// @Description Get a user's own portfolios objects
+// @Tags My Portfolio
+// @ID my-portfolios
+// @Accept  json
+// @Produce  json
+// @Success 200 {array} models.PortfolioData
+// @Failure 400 {object} interface{}
+// @Router /portfolios [get]
+// @Security Basic
 
 func MyPortfolios(w http.ResponseWriter, r *http.Request) {
 

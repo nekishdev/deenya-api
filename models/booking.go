@@ -5,7 +5,7 @@ import "time"
 // @Required ConsultantID
 type BookingData struct {
 	ID              *int64 `db:"id" json:"id,omitempty"`
-	ConsultantID    *int64 `db:"consultant_id" json:"consultant_id,omitempty" swaggertype:"integer,required"`
+	ConsultantID    *int64 `db:"consultant_id" json:"consultant_id,omitempty"`
 	ClientID        *int64 `db:"client_id" json:"client_id,omitempty" example:"43"`
 	InvoiceID       *int64 `db:"invoice_id" json:"invoice_id,omitempty"` //need to check if invoice is null on frontend?
 	QuestionnaireID *int64 `db:"questionnaire_id" json:"questionnaire_id,omitempty"`

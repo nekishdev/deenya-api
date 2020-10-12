@@ -399,6 +399,8 @@ func main() {
 		})
 
 		r.Route("/stripe", func(r chi.Router) {
+			r.Post("/connect", handler.NewConnectAccount)
+
 			r.Route("/{customerID}", func(r chi.Router) {
 				r.Get("/", handler.GetCustomer)
 				r.Post("/", handler.NewCustomer)

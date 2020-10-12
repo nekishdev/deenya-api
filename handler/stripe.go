@@ -117,13 +117,14 @@ func NewConnectAccount(w http.ResponseWriter, r *http.Request) {
 
 	decoder := json.NewDecoder(r.Body)
 
-	if err := decoder.Decode(body); err != nil {
+	if err := decoder.Decode(&body); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
 	mid := GetAuthID(r)
 
+	stripe.Key = STRIPE_TEST_SECRET
 	params := &stripe.OAuthTokenParams{
 		GrantType: stripe.String("authorization_code"),
 		Code:      stripe.String(body.code),

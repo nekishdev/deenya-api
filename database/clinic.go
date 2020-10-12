@@ -28,7 +28,7 @@ func MyClinic(mid int64) (models.Clinic, error) {
 }
 
 func NewClinic(data *models.Clinic) error {
-	_, csv, csvc := PrepareInsert(*data)
+	_, csv, csvc := PrepareInsert(data.ClinicData)
 	sql := "INSERT INTO public.clinic" + " (" + csv + ") VALUES (" + csvc + ") RETURNING id"
 
 	row, err := db.NamedQuery(sql, *data)

@@ -11,6 +11,17 @@ import (
 	"github.com/clarketm/json"
 )
 
+// NewClinic godoc
+// @Summary NewClinic
+// @Description NewClinic
+// @Tags Clinic
+// @ID NewClinic
+// @Accept  json
+// @Produce  json
+// @Param body body models.ClinicData true "Clinic data"
+// @Success 200 {object} models.ClinicData
+// @Failure 400 {object} interface{}
+// @Router /clinics [post]
 func NewClinic(w http.ResponseWriter, r *http.Request) {
 	var data models.Clinic
 	decoder := json.NewDecoder(r.Body)
@@ -38,6 +49,17 @@ func NewClinic(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// GetClinic godoc
+// @Summary GetClinic
+// @Description GetClinic
+// @Tags Clinic
+// @ID GetClinic
+// @Accept  json
+// @Produce  json
+// @Param clinicID path int true "Clinic ID"
+// @Success 200 {object} models.ClinicData
+// @Failure 400 {object} interface{}
+// @Router /clinics/{clinicID} [get]
 func GetClinic(w http.ResponseWriter, r *http.Request) {
 	q := chi.URLParam(r, "clinicID")
 
@@ -64,6 +86,18 @@ func GetClinic(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// UpdateClinic godoc
+// @Summary UpdateClinic
+// @Description UpdateClinic
+// @Tags Clinic
+// @ID UpdateClinic
+// @Accept  json
+// @Produce  json
+// @Param clinicID path int true "Clinic ID"
+// @Param body body models.ClinicData true "Clinic data"
+// @Success 200 {object} models.ClinicData
+// @Failure 400 {object} interface{}
+// @Router /clinics/{clinicID} [put]
 func UpdateClinic(w http.ResponseWriter, r *http.Request) {
 	var data models.Clinic
 	decoder := json.NewDecoder(r.Body)
@@ -92,8 +126,17 @@ func UpdateClinic(w http.ResponseWriter, r *http.Request) {
 	WriteAsJSON(w, js)
 }
 
-//
-
+// NewClinicRequest godoc
+// @Summary NewClinicRequest
+// @Description NewClinicRequest
+// @Tags Clinic
+// @ID NewClinicRequest
+// @Accept  json
+// @Produce  json
+// @Param clinicID path int true "Clinic ID"
+// @Success 200 {object} models.ClinicMemberData
+// @Failure 400 {object} interface{}
+// @Router /clinics/{clinicID} [post]
 func NewClinicRequest(w http.ResponseWriter, r *http.Request) {
 	var data models.ClinicMember
 	decoder := json.NewDecoder(r.Body)
@@ -125,6 +168,17 @@ func NewClinicRequest(w http.ResponseWriter, r *http.Request) {
 	WriteAsJSON(w, js)
 }
 
+// @Summary AcceptClinicRequest
+// @Description AcceptClinicRequest
+// @Tags Clinic
+// @ID AcceptClinicRequest
+// @Accept  json
+// @Produce  json
+// @Param clinicID path int true "Clinic ID"
+// @Param consultantID path int true "Consultant ID"
+// @Success 200 {object} models.JsonResultMessage
+// @Failure 400 {object} interface{}
+// @Router /clinics/{clinicID}/{consultantID}/accept [get]
 func AcceptClinicRequest(w http.ResponseWriter, r *http.Request) {
 	q := chi.URLParam(r, "clinicID")
 
@@ -150,9 +204,9 @@ func AcceptClinicRequest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	message := struct {
-		message string
-	}{message: "Success"}
+	message := models.JsonResultMessage{
+		Message: "Success",
+	}
 
 	js, err := json.Marshal(message)
 	if err != nil {
@@ -164,6 +218,17 @@ func AcceptClinicRequest(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// ListClinicRequests godoc
+// @Summary ListClinicRequests
+// @Description ListClinicRequests
+// @Tags Clinic
+// @ID ListClinicRequests
+// @Accept  json
+// @Produce  json
+// @Param clinicID path int true "Clinic ID"
+// @Success 200 {array} models.ClinicMemberData
+// @Failure 400 {object} interface{}
+// @Router /clinics/{clinicID} [get]
 func ListClinicRequests(w http.ResponseWriter, r *http.Request) {
 	q := chi.URLParam(r, "clinicID")
 
@@ -191,6 +256,17 @@ func ListClinicRequests(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// ListClinicConsultants godoc
+// @Summary ListClinicConsultants
+// @Description ListClinicConsultants
+// @Tags Clinic
+// @ID ListClinicConsultants
+// @Accept  json
+// @Produce  json
+// @Param clinicID path int true "Clinic ID"
+// @Success 200 {array} models.UserData
+// @Failure 400 {object} interface{}
+// @Router /clinics/{clinicID} [get]
 func ListClinicConsultants(w http.ResponseWriter, r *http.Request) {
 	q := chi.URLParam(r, "clinicID")
 
@@ -216,6 +292,17 @@ func ListClinicConsultants(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary RemoveClinicMember
+// @Description RemoveClinicMember
+// @Tags Clinic
+// @ID RemoveClinicMember
+// @Accept  json
+// @Produce  json
+// @Param clinicID path int true "Clinic ID"
+// @Param consultantID path int true "Consultant ID"
+// @Success 200 {object} models.JsonResultMessage
+// @Failure 400 {object} interface{}
+// @Router /clinics/{clinicID}/{consultantID}/remove [get]
 func RemoveClinicMember(w http.ResponseWriter, r *http.Request) {
 	q := chi.URLParam(r, "clinicID")
 
@@ -241,9 +328,9 @@ func RemoveClinicMember(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	message := struct {
-		message string
-	}{message: "Success"}
+	message := models.JsonResultMessage{
+		Message: "Success",
+	}
 
 	js, err := json.Marshal(message)
 	if err != nil {
@@ -255,6 +342,17 @@ func RemoveClinicMember(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// LeaveClinic godoc
+// @Summary LeaveClinic
+// @Description LeaveClinic
+// @Tags Clinic
+// @ID LeaveClinic
+// @Accept  json
+// @Produce  json
+// @Param clinicID path int true "Clinic ID"
+// @Success 200 {object} models.JsonResultMessage
+// @Failure 400 {object} interface{}
+// @Router /clinics/{clinicID} [delete]
 func LeaveClinic(w http.ResponseWriter, r *http.Request) {
 	q := chi.URLParam(r, "clinicID")
 
@@ -272,9 +370,9 @@ func LeaveClinic(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	message := struct {
-		message string
-	}{message: "Success"}
+	message := models.JsonResultMessage{
+		Message: "Success",
+	}
 
 	js, err := json.Marshal(message)
 	if err != nil {
@@ -285,6 +383,16 @@ func LeaveClinic(w http.ResponseWriter, r *http.Request) {
 	WriteAsJSON(w, js)
 }
 
+// MyClinic godoc
+// @Summary MyClinic
+// @Description MyClinic
+// @Tags Clinic
+// @ID MyClinic
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} models.ClinicData
+// @Failure 400 {object} interface{}
+// @Router /clinics [get]
 func MyClinic(w http.ResponseWriter, r *http.Request) {
 
 	mid := GetAuthID(r)

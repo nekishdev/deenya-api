@@ -11,6 +11,15 @@ import (
 	"github.com/clarketm/json"
 )
 
+// @Summary MyInvoices
+// @Description MyInvoices
+// @Tags Clinic
+// @ID MyInvoices
+// @Accept  json
+// @Produce  json
+// @Success 200 {array} models.InvoiceData
+// @Failure 400 {object} interface{}
+// @Router /finance/invoices [get]
 func MyInvoices(w http.ResponseWriter, r *http.Request) {
 	// err := GetAuthID(r)
 
@@ -39,6 +48,16 @@ func MyInvoices(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary GetInvoice
+// @Description GetInvoice
+// @Tags Clinic
+// @ID GetInvoice
+// @Accept  json
+// @Produce  json
+// @Param invoiceID path int true "Invoice ID"
+// @Success 200 {object} models.InvoiceData
+// @Failure 400 {object} interface{}
+// @Router /finance/{invoiceID} [get]
 func GetInvoice(w http.ResponseWriter, r *http.Request) {
 	q := chi.URLParam(r, "invoiceID")
 
@@ -78,6 +97,17 @@ func GetInvoice(w http.ResponseWriter, r *http.Request) {
 	WriteAsJSON(w, js)
 }
 
+// @Summary UpdateInvoice
+// @Description UpdateInvoice
+// @Tags Clinic
+// @ID UpdateInvoice
+// @Accept  json
+// @Produce  json
+// @Param invoiceID path int true "Invoice ID"
+// @Param body body models.InvoiceData true "Invoice data"
+// @Success 200 {object} models.InvoiceData
+// @Failure 400 {object} interface{}
+// @Router /finance/{invoiceID} [put]
 func UpdateInvoice(w http.ResponseWriter, r *http.Request) {
 	var data models.Invoice
 	decoder := json.NewDecoder(r.Body)
@@ -102,6 +132,16 @@ func UpdateInvoice(w http.ResponseWriter, r *http.Request) {
 	WriteAsJSON(w, js)
 }
 
+// @Summary NewInvoice
+// @Description NewInvoice
+// @Tags Clinic
+// @ID NewInvoice
+// @Accept  json
+// @Produce  json
+// @Param body body models.InvoiceData true "Invoice data"
+// @Success 200 {object} models.InvoiceData
+// @Failure 400 {object} interface{}
+// @Router /finance/invoices [post]
 func NewInvoice(w http.ResponseWriter, r *http.Request) {
 	var data models.Invoice
 	decoder := json.NewDecoder(r.Body)

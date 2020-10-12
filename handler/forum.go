@@ -99,6 +99,16 @@ func UpdateForumThread(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// @Summary DeleteForumThread
+// @Description DeleteForumThread
+// @Tags Forum
+// @ID DeleteForumThread
+// @Accept  json
+// @Produce  json
+// @Param threadID path int true "Thread id"
+// @Success 200 {object} models.JsonResultMessage
+// @Failure 400 {object} interface{}
+// @Router /forum/{threadID} [delete]
 func DeleteForumThread(w http.ResponseWriter, r *http.Request) {
 	var id int64
 	var err error
@@ -122,9 +132,7 @@ func DeleteForumThread(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp := struct {
-		Message string `json:"message"`
-	}{
+	resp := models.JsonResultMessage{
 		Message: "Success",
 	}
 
@@ -138,6 +146,16 @@ func DeleteForumThread(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// @Summary NewForumThread
+// @Description NewForumThread
+// @Tags Forum
+// @ID NewForumThread
+// @Accept  json
+// @Produce  json
+// @Param body body models.ForumThreadData true "Thread data"
+// @Success 200 {object} models.ForumThreadData
+// @Failure 400 {object} interface{}
+// @Router /forum [post]
 func NewForumThread(w http.ResponseWriter, r *http.Request) {
 	var data models.ForumThread
 
@@ -204,6 +222,15 @@ func UserForumThreads(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// @Summary MyForumThreads
+// @Description MyForumThreads
+// @Tags Forum
+// @ID MyForumThreads
+// @Accept  json
+// @Produce  json
+// @Success 200 {array} models.ForumThreadData
+// @Failure 400 {object} interface{}
+// @Router /forum [get]
 func MyForumThreads(w http.ResponseWriter, r *http.Request) {
 
 	aid := GetAuthID(r)
@@ -230,6 +257,15 @@ func SearchForumThreads(w http.ResponseWriter, r *http.Request) {
 	//search forum threads for query term + params
 }
 
+// @Summary FeedForumThreads
+// @Description FeedForumThreads
+// @Tags Forum
+// @ID FeedForumThreads
+// @Accept  json
+// @Produce  json
+// @Success 200 {array} models.ForumThreadData
+// @Failure 400 {object} interface{}
+// @Router /forum/feed [get]
 func FeedForumThreads(w http.ResponseWriter, r *http.Request) {
 
 	data, err := database.ForumThreadFeed()
@@ -250,6 +286,17 @@ func FeedForumThreads(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// @Summary GetForumPost
+// @Description GetForumPost
+// @Tags Forum
+// @ID GetForumPost
+// @Accept  json
+// @Produce  json
+// @Param threadID path int true "Thread id"
+// @Param postID path int true "Post id"
+// @Success 200 {object} models.ForumPostData
+// @Failure 400 {object} interface{}
+// @Router /forum/{threadID}/{postID} [get]
 func GetForumPost(w http.ResponseWriter, r *http.Request) {
 	var id int64
 	var err error
@@ -280,6 +327,18 @@ func GetForumPost(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// @Summary UpdateForumPost
+// @Description UpdateForumPost
+// @Tags Forum
+// @ID UpdateForumPost
+// @Accept  json
+// @Produce  json
+// @Param threadID path int true "Thread id"
+// @Param postID path int true "Post id"
+// @Param body body models.ForumPostData true "Post data"
+// @Success 200 {object} models.ForumPostData
+// @Failure 400 {object} interface{}
+// @Router /forum/{threadID}/{postID} [put]
 func UpdateForumPost(w http.ResponseWriter, r *http.Request) {
 	var data models.ForumPost
 
@@ -317,6 +376,17 @@ func UpdateForumPost(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary DeleteForumPost
+// @Description DeleteForumPost
+// @Tags Forum
+// @ID DeleteForumPost
+// @Accept  json
+// @Produce  json
+// @Param threadID path int true "Thread id"
+// @Param postID path int true "Post id"
+// @Success 200 {object} models.JsonResultMessage
+// @Failure 400 {object} interface{}
+// @Router /forum/{threadID}/{postID} [delete]
 func DeleteForumPost(w http.ResponseWriter, r *http.Request) {
 	var id int64
 	var err error
@@ -339,9 +409,7 @@ func DeleteForumPost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	js, err := json.Marshal(struct {
-		Message string
-	}{
+	js, err := json.Marshal(models.JsonResultMessage{
 		Message: "Success",
 	})
 
@@ -355,6 +423,17 @@ func DeleteForumPost(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary NewForumPost
+// @Description NewForumPost
+// @Tags Forum
+// @ID NewForumPost
+// @Accept  json
+// @Produce  json
+// @Param threadID path int true "Thread id"
+// @Param body body models.ForumPostData true "Forum Post data"
+// @Success 200 {object} models.ForumPostData
+// @Failure 400 {object} interface{}
+// @Router /forum/{threadID} [post]
 func NewForumPost(w http.ResponseWriter, r *http.Request) {
 	var data models.ForumPost
 
@@ -396,7 +475,7 @@ func NewForumPost(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func MyForumPosts(w http.ResponseWriter, r *http.Request) {
+/*func MyForumPosts(w http.ResponseWriter, r *http.Request) {
 
 	var err error
 
@@ -424,8 +503,18 @@ func MyForumPosts(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
 
-}
+}*/
 
+// @Summary ForumThreadPosts
+// @Description ForumThreadPosts
+// @Tags Forum
+// @ID ForumThreadPosts
+// @Accept  json
+// @Produce  json
+// @Param threadID path int true "Thread id"
+// @Success 200 {array} models.ForumPostData
+// @Failure 400 {object} interface{}
+// @Router /forum/{threadID}/posts [get]
 func ForumThreadPosts(w http.ResponseWriter, r *http.Request) {
 	var data []models.ForumPost
 

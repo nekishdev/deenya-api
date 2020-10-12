@@ -3,20 +3,15 @@ package main
 import (
 	"deenya-api/database"
 	"deenya-api/handler"
-	"deenya-api/models"
 	"fmt"
-	"net/http"
-	"time"
-
-	"github.com/clarketm/json"
-
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/cors"
 	"github.com/go-chi/jwtauth"
+	"net/http"
 )
 
-func main2() {
+/*func main2() {
 	database.Init()
 
 	// database.AvailableBookings(0)
@@ -64,9 +59,9 @@ func main2() {
 	for {
 
 	}
-}
+}*/
 
-func TransformTime(dt time.Time, tz string) time.Time {
+/*func TransformTime(dt time.Time, tz string) time.Time {
 	formatter := "2006-01-02T15:04:05.999Z"
 	loc, _ := time.LoadLocation(tz)
 	prs, _ := time.Parse(formatter, "2020-08-18T21:17:51.000Z")
@@ -75,7 +70,7 @@ func TransformTime(dt time.Time, tz string) time.Time {
 	//receive time in ISO UTC format, add timezone location data back into time.Time object.
 
 	return test
-}
+}*/
 
 // @title Swagger Clinics API
 // @version 1.0
@@ -113,7 +108,7 @@ func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 
-	cors := cors.New(cors.Options{
+	corsParams := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
@@ -121,7 +116,7 @@ func main() {
 		AllowCredentials: true,
 		MaxAge:           300, // Maximum value not ignored by any of major browsers
 	})
-	r.Use(cors.Handler)
+	r.Use(corsParams.Handler)
 
 	handler.TokenAuth = jwtauth.New("HS256", []byte("secret123"), nil)
 
@@ -404,6 +399,8 @@ func main() {
 		})
 
 		r.Route("/stripe", func(r chi.Router) {
+			r.Post("/connect", handler.NewConnectAccount)
+
 			r.Route("/{customerID}", func(r chi.Router) {
 				r.Get("/", handler.GetCustomer)
 				r.Post("/", handler.NewCustomer)

@@ -1,7 +1,7 @@
 package models
 
 type Test struct {
-	ID     *int64  `json:"id,omitempty" db:"id"`
+	ID     *int64  `json:"id,omitempty" db:"id" readonly:"true"`
 	Tester *string `json:"tester,omitempty" db:"tester"`
 	Opt    *bool   `json:"opt,omitempty" db:"opt"`
 	//Created *time.Time `json:"created,omitempty"`

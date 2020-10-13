@@ -11,71 +11,9 @@ import (
 	"net/http"
 )
 
-/*func main2() {
-	database.Init()
-
-	// database.AvailableBookings(0)
-	// now := time.Now().UTC()
-	// check := time.Date(now.Year(), now.Month(), now.Day(), now.Hour(), 0, 0, 0, now.Location())
-	// fmt.Println(check)
-
-	// loc, _ := time.LoadLocation("Asia/Shanghai")
-	// check2 := check.In(loc)
-	// fmt.Println(check2)
-	// panic("test")
-
-	mid := int64(1)
-	tid := int64(2)
-	name := "test portfolio"
-	tbool := true
-
-	ret, err := database.GetMedia(int64(1))
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	data := models.Portfolio{
-		PortfolioData: models.PortfolioData{
-			ConsultantID: &mid,
-			ClientID:     &tid,
-			Caption:      &name,
-			IsPublished:  &tbool,
-		},
-		Before: &ret,
-	}
-
-	_, csv, _ := database.PrepareInsert(data.PortfolioData)
-
-	fmt.Println(csv)
-
-	database.NewPortfolio(&data)
-
-	js, err := json.Marshal(data)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println("JS:" + string(js))
-
-	for {
-
-	}
-}*/
-
-/*func TransformTime(dt time.Time, tz string) time.Time {
-	formatter := "2006-01-02T15:04:05.999Z"
-	loc, _ := time.LoadLocation(tz)
-	prs, _ := time.Parse(formatter, "2020-08-18T21:17:51.000Z")
-
-	test := time.Date(prs.Year(), prs.Month(), prs.Day(), prs.Hour(), prs.Minute(), 0, 0, loc)
-	//receive time in ISO UTC format, add timezone location data back into time.Time object.
-
-	return test
-}*/
-
-// @title Swagger Clinics API
+// @title AvaMed API
 // @version 1.0
-// @description This is a sample server
-// @termsOfService http://swagger.io/terms/
+// @description This is a REST API for AvaMed
 
 // @contact.name API Support
 // @contact.url http://www.swagger.io/support
@@ -91,17 +29,7 @@ import (
 // @host localhost:3333
 // @BasePath /
 func main() {
-	// formatter := "2006-01-02T15:04:05.999Z"
-	// js := "2020-08-18T21:17:51.000Z"
-	// loc, _ := time.LoadLocation("Australia/Brisbane")
-	// // now := time.Now()
-	// prs, _ := time.Parse(formatter, js)
 
-	// test := time.Date(prs.Year(), prs.Month(), prs.Day(), prs.Hour(), prs.Minute(), 0, 0, loc)
-	// //test := time.Date(now.Year(), now.Month(), now.Day(), now.Hour(), 0, 0, 0, now.Location)
-	// fmt.Println(test.Format(formatter))
-
-	// panic("test")
 	var err error
 	database.Init()
 

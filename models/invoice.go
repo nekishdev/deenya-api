@@ -3,10 +3,10 @@ package models
 import "time"
 
 type InvoiceData struct {
-	ID           *int64     `json:"id,omitempty" db:"id"`
+	ID           *int64     `json:"id,omitempty" db:"id" readonly:"true"`
 	IsPaid       *bool      `json:"is_paid,omitempty" db:"is_paid"`
 	Total        *int64     `json:"total,omitempty" db:"total"`
-	CreatedAt    *time.Time `json:"created_at,omitempty" db:"created_at"`
+	CreatedAt    *time.Time `json:"created_at,omitempty" db:"created_at" readonly:"true"`
 	ConsultantID *int64     `json:"consultant_id,omiempty" db:"consultant_id"`
 	ClientID     *int64     `json:"client_id,omitempty" db:"client_id"`
 	IsBooking    *bool      `json:"is_booking,omitempty" db:"is_booking"`

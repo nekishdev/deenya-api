@@ -19,7 +19,7 @@ import (
 // @Success 200 {object} models.QuestionnaireData
 // @Failure 400 {object} interface{}
 // @Router /questionnaires/{questionnaireID} [get]
-// @Security Basic
+// @Security ApiKeyAuth
 func GetQuestionnaire(w http.ResponseWriter, r *http.Request) {
 
 }
@@ -36,7 +36,7 @@ func GetQuestionnaire(w http.ResponseWriter, r *http.Request) {
 // @Success 200 {object} models.QuestionnaireData
 // @Failure 400 {object} interface{}
 // @Router /questionnaires/{questionnaireID} [post]
-// @Security Basic
+// @Security ApiKeyAuth
 func UpdateQuestionnaire(w http.ResponseWriter, r *http.Request) {
 
 	var data models.Questionnaire
@@ -77,7 +77,7 @@ func UpdateQuestionnaire(w http.ResponseWriter, r *http.Request) {
 // @Success 200 {object} models.JsonResultMessage
 // @Failure 400 {object} interface{}
 // @Router /questionnaires/{questionnaireID} [put]
-// @Security Basic
+// @Security ApiKeyAuth
 func DeleteQuestionnaire(w http.ResponseWriter, r *http.Request) {
 
 }
@@ -94,7 +94,7 @@ func DeleteQuestionnaire(w http.ResponseWriter, r *http.Request) {
 // @Success 200 {object} models.QuestionnaireData
 // @Failure 400 {object} interface{}
 // @Router /{bookingID}/questionnaire [post]
-// @Security Basic
+// @Security ApiKeyAuth
 func NewQuestionnaire(w http.ResponseWriter, r *http.Request) {
 
 }
@@ -115,7 +115,7 @@ func GetQuestion(w http.ResponseWriter, r *http.Request) {
 // @Success 200 {object} models.QuestionData
 // @Failure 400 {object} interface{}
 // @Router /questionnaires/{questionnaireID} [post]
-// @Security Basic
+// @Security ApiKeyAuth
 func UpdateQuestion(w http.ResponseWriter, r *http.Request) {
 	var data models.Question
 
@@ -150,7 +150,7 @@ func UpdateQuestion(w http.ResponseWriter, r *http.Request) {
 // @Success 200 {object} models.JsonResultMessage
 // @Failure 400 {object} interface{}
 // @Router /questionnaires/{questionnaireID}/{questionID} [delete]
-// @Security Basic
+// @Security ApiKeyAuth
 func DeleteQuestion(w http.ResponseWriter, r *http.Request) {
 
 }
@@ -167,7 +167,7 @@ func DeleteQuestion(w http.ResponseWriter, r *http.Request) {
 // @Success 200 {object} models.QuestionData
 // @Failure 400 {object} interface{}
 // @Router /questionnaires/{questionnaireID}/ [post]
-// @Security Basic
+// @Security ApiKeyAuth
 func NewQuestion(w http.ResponseWriter, r *http.Request) {
 
 }

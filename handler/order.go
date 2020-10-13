@@ -18,7 +18,7 @@ import (
 // @ID order-get
 // @Accept  json
 // @Produce  json
-// @Param id path int true "Order ID"
+// @Param orderID path int true "Order ID"
 // @Success 200 {object} models.OrderData
 // @Failure 400 {object} interface{}
 // @Router /orders/{orderID} [get]
@@ -67,11 +67,11 @@ func GetOrder(w http.ResponseWriter, r *http.Request) {
 // @Summary Update order object
 // @Description Update order object
 // @Tags Order
-// @ID order-get
+// @ID order-update
 // @Accept  json
 // @Produce  json
-// @Param id path int true "Order ID"
-// @Param order body model.OrderData true "Update order"
+// @Param orderID path int true "Order ID"
+// @Param order body models.OrderData true "Update order"
 // @Success 200 {object} models.OrderData
 // @Failure 400 {object} interface{}
 // @Router /orders/{orderID} [put]
@@ -126,11 +126,11 @@ func UpdateOrder(w http.ResponseWriter, r *http.Request) {
 // @Summary Update order object
 // @Description Update order object
 // @Tags Order
-// @ID order-get
+// @ID new-order
 // @Accept  json
 // @Produce  json
-// @Param id path int true "Order ID"
-// @Param order body model.OrderData true "Update order"
+// @Param orderID path int true "Order ID"
+// @Param order body models.OrderData true "Update order"
 // @Success 200 {object} models.OrderData
 // @Failure 400 {object} interface{}
 // @Router /orders/{orderID} [put]

@@ -13,7 +13,7 @@ import (
 
 // @Summary MyInvoices
 // @Description MyInvoices
-// @Tags Clinic
+// @Tags Finance
 // @ID MyInvoices
 // @Accept  json
 // @Produce  json
@@ -50,7 +50,7 @@ func MyInvoices(w http.ResponseWriter, r *http.Request) {
 
 // @Summary GetInvoice
 // @Description GetInvoice
-// @Tags Clinic
+// @Tags Finance
 // @ID GetInvoice
 // @Accept  json
 // @Produce  json
@@ -99,7 +99,7 @@ func GetInvoice(w http.ResponseWriter, r *http.Request) {
 
 // @Summary UpdateInvoice
 // @Description UpdateInvoice
-// @Tags Clinic
+// @Tags Finance
 // @ID UpdateInvoice
 // @Accept  json
 // @Produce  json
@@ -134,7 +134,7 @@ func UpdateInvoice(w http.ResponseWriter, r *http.Request) {
 
 // @Summary NewInvoice
 // @Description NewInvoice
-// @Tags Clinic
+// @Tags Finance
 // @ID NewInvoice
 // @Accept  json
 // @Produce  json

@@ -3,14 +3,14 @@ package models
 import "time"
 
 type OrderData struct {
-	ID           *int64 `db:"id" json:"id,omitempty"`
+	ID           *int64 `db:"id" json:"id,omitempty" readonly:"true"`
 	ClientID     *int64 `db:"client_id" json:"client_id,omitempty"`
 	ConsultantID *int64 `db:"consultant_id" json:"consultant_id,omitempty"`
 	//InvoiceID *int64     `db:"invoice_id" json:"invoice_id,omitempty"` //create invoice on order creation
 	Discount  *int64     `db:"discount" json:"discount,omitempty"`
 	Total     *int64     `db:"total" json:"total,omitempty"`
 	Status    *string    `db:"status" json:"status,omitempty"`
-	CreatedAt *time.Time `db:"created_at" json:"created_at,omitempty"`
+	CreatedAt *time.Time `db:"created_at" json:"created_at,omitempty" readonly:"true"`
 }
 
 type Order struct {
@@ -25,7 +25,7 @@ type Order struct {
 //https://github.com/clarketm/json - If omitempty is applied to a struct and all the children of the struct are empty, then on marshalling it will be omitted from the encoded json.
 
 type OrderItemData struct {
-	ID        *int64 `db:"id" json:"id,omitempty"`
+	ID        *int64 `db:"id" json:"id,omitempty" readonly:"true"`
 	OrderID   *int64 `db:"order_id" json:"order_id,omitempty"`
 	ProductID *int64 `db:"product_id" json:"product_id,omitempty"`
 	//InvoiceID *int64 `db:"invoice_id" json:"invoice_id,omitempty"` //update in postgres table? multiple invoices/consultants per order? Or only one consultant per order?
@@ -41,7 +41,7 @@ type OrderItem struct {
 }
 
 type OrderDeliveryData struct {
-	ID           *int64     `db:"id" json:"id,omitempty"` //delivery_id, merge with Order as anonymous struct?
+	ID           *int64     `db:"id" json:"id,omitempty" readonly:"true"` //delivery_id, merge with Order as anonymous struct?
 	OrderID      *int64     `db:"order_id" json:"order_id,omitempty"`
 	Status       *string    `db:"status" json:"status,omitempty"`
 	TrackingCode *string    `db:"tracking_code" json:"tracking_code,omitempty"`

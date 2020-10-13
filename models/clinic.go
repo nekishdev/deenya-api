@@ -22,11 +22,11 @@ type Clinic struct {
 }
 
 type ClinicMemberData struct {
-	ID           *int64     `db:"id" json:"id,omitempty"`
+	ID           *int64     `db:"id" json:"id,omitempty" readonly:"true"`
 	ConsultantID *int64     `db:"consultant_id" json:"consultant_id,omitempty"`
 	ClinicID     *int64     `db:"clinic_id" json:"clinic_id,omitempty"`
 	IsAccepted   *bool      `db:"is_accepted" json:"is_accepted,omitempty"` //request or member
-	CreatedAt    *time.Time `db:"created_at" json:"created_at,omitempty"`
+	CreatedAt    *time.Time `db:"created_at" json:"created_at,omitempty" readonly:"true"`
 }
 
 type ClinicMember struct {

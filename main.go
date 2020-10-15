@@ -328,10 +328,11 @@ func main() {
 
 		r.Route("/stripe", func(r chi.Router) {
 			r.Post("/connect", handler.NewConnectAccount)
+			r.Post("/", handler.NewCustomer)
 
 			r.Route("/{customerID}", func(r chi.Router) {
 				r.Get("/", handler.GetCustomer)
-				r.Post("/", handler.NewCustomer)
+
 				r.Put("/", handler.UpdateCustomer)
 				r.Delete("/", handler.DeleteCustomer)
 			})

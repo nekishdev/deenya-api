@@ -26,36 +26,46 @@ func NewStripeConnect(new models.StripeConnect) error {
 	return err
 }
 
-func GetCustomer(id int64) (models.Customer, error) {
-	var data models.Customer
-	q := `SELECT * FROM public.customer WHERE id = $1`
-	err := db.Get(&data, q, id)
+func GetCustomer(clientID int64) (models.StripeCustomer, error) {
+	var data models.StripeCustomer
+	q := `SELECT * FROM public.stripe_customer WHERE client_id = $1`
+	err := db.Get(&data, q, clientID)
 	if err != nil {
 		fmt.Println(err)
 	}
 	return data, err
 }
 
-func UpdateCustomer(data models.Customer) error {
+func GetCustomerByID(customerID string) (models.StripeCustomer, error) {
+	var data models.StripeCustomer
+	q := `SELECT * FROM public.stripe_customer WHERE stripe_customer_id = $1`
+	err := db.Get(&data, q, customerID)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return data, err
+}
+
+func UpdateCustomer(data models.StripeCustomer) error {
 	var err error
 	umap := StructMap(data)
 	uquery, err := UpString(umap)
 	if err != nil {
 		return err
 	}
-	q := "UPDATE public.customer " + uquery + " WHERE id = :id"
+	q := "UPDATE public.stripe_customer " + uquery + " WHERE stripe_customer_id = :id"
 
-	_, err = db.NamedQuery(q, data)
+	_, err = db.NamedQuery(q, data.CustomerToken)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func DeleteCustomer(id int64) error {
-	q := `DELETE FROM public.customer WHERE id = $1`
+func DeleteCustomer(customerID string) error {
+	q := `DELETE FROM public.stripe_customer WHERE stripe_customer_id = $1`
 
-	_, err := db.Exec(q, id)
+	_, err := db.Exec(q, customerID)
 	if err != nil {
 		return err
 	}
@@ -63,14 +73,15 @@ func DeleteCustomer(id int64) error {
 	return nil
 }
 
-func NewCustomer(new *models.Customer) error {
+func NewCustomer(new *models.StripeCustomer) error {
 	var id int64
+
 	_, csv, csvc := PrepareInsert(*new)
-	sql := "INSERT INTO public.customer" + " (" + csv + ") VALUES (" + csvc + ") RETURNING id"
+	sql := "INSERT INTO public.stripe_customer" + " (" + csv + ") VALUES (" + csvc + ") RETURNING id"
 
 	row, err := db.NamedQuery(sql, new)
 	if err != nil {
-		fmt.Println(err)
+		return err
 	}
 	if row.Next() {
 		row.Scan(&id)

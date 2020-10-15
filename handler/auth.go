@@ -3,6 +3,7 @@ package handler
 import (
 	"deenya-api/database"
 	"deenya-api/models"
+	"deenya-api/services"
 	"errors"
 	"fmt"
 	"net/http"
@@ -37,9 +38,6 @@ func Verify(w http.ResponseWriter, r *http.Request) {
 // @Failure 400 {object} interface{}
 // @Router /register [post]
 func Register(w http.ResponseWriter, r *http.Request) {
-	// body := struct {
-	// 	User models.User `json:"user"`
-	// }{}
 
 	var user models.User
 
@@ -54,13 +52,15 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// user := body.User
-
-	//fmt.Println(*user.Username, *user.Email)
-
 	err := database.NewUser(&user)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	_, err = services.NewStripeCustomerForClient(*user.ID)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("error create a Stripe customer, %s", err.Error()), http.StatusBadRequest)
 		return
 	}
 

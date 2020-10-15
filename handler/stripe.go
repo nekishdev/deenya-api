@@ -3,7 +3,9 @@ package handler
 import (
 	"deenya-api/database"
 	"deenya-api/models"
+	"deenya-api/stripe_functions"
 	"deenya-api/util"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -11,15 +13,7 @@ import (
 
 	"github.com/clarketm/json"
 	"github.com/stripe/stripe-go"
-	"github.com/stripe/stripe-go/oauth"
 	"github.com/stripe/stripe-go/paymentintent"
-)
-
-const (
-	STRIPE_TEST_SECRET            = `sk_test_JqR28oyXlK7IDYKvMMi4Be5i00ytnVrnmE`
-	STRIPE_LIVE_SECRET            = ``
-	STRIPE_DEFAULT_CURRENCY       = "GBP"
-	STRIPE_CONNECT_CLIENT_ID_TEST = `ca_Hgt2WXrYld14yrb6zEvCE5x5m3k57eUv`
 )
 
 func GenerateState() string {
@@ -49,6 +43,13 @@ func InitiateInvoicePayment(w http.ResponseWriter, r *http.Request) {
 	fee := *invoice.Total / 5
 	//app commission 20%
 
+	customer, err := database.GetCustomer(mid)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("error get customer info, %s", err.Error()), http.StatusBadRequest)
+		return
+	}
+
+	stripe.Key = stripe_functions.STRIPE_TEST_SECRET
 	params := &stripe.PaymentIntentParams{
 		// PaymentMethodTypes: stripe.StringSlice([]string{
 		// 	"card",
@@ -57,7 +58,7 @@ func InitiateInvoicePayment(w http.ResponseWriter, r *http.Request) {
 		Amount:               stripe.Int64(*invoice.Total),
 		Currency:             stripe.String(string(stripe.CurrencyGBP)),
 		ApplicationFeeAmount: stripe.Int64(fee),
-		//StatementDescriptor:
+		Customer:             stripe.String(*customer.CustomerToken),
 	}
 
 	params.AddMetadata("invoice_id", strconv.FormatInt(*invoice.ID, 10))
@@ -124,19 +125,14 @@ func NewConnectAccount(w http.ResponseWriter, r *http.Request) {
 
 	mid := GetAuthID(r)
 
-	stripe.Key = STRIPE_TEST_SECRET
-	params := &stripe.OAuthTokenParams{
-		GrantType: stripe.String("authorization_code"),
-		Code:      stripe.String(body.code),
-	}
-	token, err := oauth.New(params)
+	token, err := stripe_functions.GetAccountAuthToken(body.code)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
 	data := models.StripeConnect{
-		AccountToken: &token.StripeUserID,
+		AccountToken: &token,
 		ConsultantID: &mid,
 	}
 

@@ -53,9 +53,9 @@ func UpdateCustomer(data models.StripeCustomer) error {
 	if err != nil {
 		return err
 	}
-	q := "UPDATE public.stripe_customer " + uquery + " WHERE stripe_customer_id = :id"
+	q := "UPDATE public.stripe_customer " + uquery + " WHERE id = :id"
 
-	_, err = db.NamedQuery(q, data.CustomerToken)
+	_, err = db.NamedQuery(q, data)
 	if err != nil {
 		return err
 	}

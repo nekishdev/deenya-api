@@ -33,17 +33,28 @@ func UpdateCustomer(w http.ResponseWriter, r *http.Request) {
 
 	customerID := chi.URLParam(r, "customerID")
 
-	data.CustomerToken = &customerID
+	decoder := json.NewDecoder(r.Body)
+	if err := decoder.Decode(&data); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
 
-	err := database.UpdateCustomer(data)
+	// get customer
+	customer, err := database.GetCustomerByID(customerID)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
 
+	// update customer
+	data.ID = customer.ID
+	err = database.UpdateCustomer(data)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
 	js, err := json.Marshal(data)
-
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return

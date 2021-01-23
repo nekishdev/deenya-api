@@ -32,10 +32,19 @@ func Verify(w http.ResponseWriter, r *http.Request) {
 // @ID auth-register
 // @Accept  json
 // @Produce  json
-// @Param body body models.UserData true "User data"
+// @Param body body models.UserData true "User Data"
 // @Success 200 {object} models.UserData
-// @Failure 400 {object} interface{}
+// @Failure 400 {object} RegisterResponse
 // @Router /register [post]
+
+type RegisterRequest struct {
+}
+
+type RegisterResponse struct {
+	User  models.User `json:"user"`
+	Token string      `json:"token"`
+}
+
 func Register(w http.ResponseWriter, r *http.Request) {
 	// body := struct {
 	// 	User models.User `json:"user"`

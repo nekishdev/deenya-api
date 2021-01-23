@@ -268,6 +268,8 @@ func UserProductsPage(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+//PENDING - product_model
+
 func SuggestProductModels(w http.ResponseWriter, r *http.Request) {
 	q := struct {
 		tags []string

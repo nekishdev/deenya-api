@@ -10,7 +10,7 @@ import (
 
 const (
 	DB_USER     = "postgres"
-	DB_PASSWORD = "PandoraTeam2020"
+	DB_PASSWORD = "PandoraTeam2021"
 	DB_NAME     = "deenya"
 	DB_HOST     = "173.212.240.109"
 	DB_PORT     = "5432"

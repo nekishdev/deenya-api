@@ -23,7 +23,7 @@ import (
 // @Success 200 {object} models.ConversationData
 // @Failure 400 {object} interface{}
 // @Router /conversations/{id} [get]
-// @Security Basic
+// @Security ApiKeyAuth
 
 func GetConversation(w http.ResponseWriter, r *http.Request) {
 	// var verified bool
@@ -82,7 +82,7 @@ func GetConversation(w http.ResponseWriter, r *http.Request) {
 // @Success 200 {object} models.ConversationData
 // @Failure 400 {object} interface{}
 // @Router /conversations/{id} [put]
-// @Security Basic
+// @Security ApiKeyAuth
 
 func UpdateConversation(w http.ResponseWriter, r *http.Request) {
 	var data models.Conversation
@@ -138,7 +138,7 @@ func UpdateConversation(w http.ResponseWriter, r *http.Request) {
 // @Success 200 {object} models.JsonResultMessage
 // @Failure 400 {object} interface{}
 // @Router /conversations/{id} [delete]
-// @Security Basic
+// @Security ApiKeyAuth
 
 func DeleteConversation(w http.ResponseWriter, r *http.Request) {
 	var id int64
@@ -181,7 +181,7 @@ func DeleteConversation(w http.ResponseWriter, r *http.Request) {
 // @Success 200 {object} models.ConversationData
 // @Failure 400 {object} interface{}
 // @Router /conversations [post]
-// @Security Basic
+// @Security ApiKeyAuth
 
 func NewConversation(w http.ResponseWriter, r *http.Request) {
 	var data models.Conversation
@@ -231,7 +231,7 @@ func NewConversation(w http.ResponseWriter, r *http.Request) {
 // @Success 200 {array} models.ConversationData
 // @Failure 400 {object} interface{}
 // @Router /conversations [post]
-// @Security Basic
+// @Security ApiKeyAuth
 func MyConversations(w http.ResponseWriter, r *http.Request) {
 	var id int64
 	var err error
@@ -268,7 +268,7 @@ func MyConversations(w http.ResponseWriter, r *http.Request) {
 // @Success 200 {object} models.MessageData
 // @Failure 400 {object} interface{}
 // @Router /conversations/{conversationID}/{messageID} [get]
-// @Security Basic
+// @Security ApiKeyAuth
 func GetMessage(w http.ResponseWriter, r *http.Request) {
 	var id int64
 	var err error
@@ -314,7 +314,7 @@ func GetMessage(w http.ResponseWriter, r *http.Request) {
 // @Success 200 {object} models.MessageData
 // @Failure 400 {object} interface{}
 // @Router /conversations/{conversationID}/{messageID} [put]
-// @Security Basic
+// @Security ApiKeyAuth
 func UpdateMessage(w http.ResponseWriter, r *http.Request) {
 	var data models.Message
 
@@ -364,7 +364,7 @@ func UpdateMessage(w http.ResponseWriter, r *http.Request) {
 // @Success 200 {object} models.JsonResultMessage
 // @Failure 400 {object} interface{}
 // @Router /conversations/{conversationID}/{messageID} [delete]
-// @Security Basic
+// @Security ApiKeyAuth
 func DeleteMessage(w http.ResponseWriter, r *http.Request) {
 	var id int64
 	var err error
@@ -414,7 +414,7 @@ func DeleteMessage(w http.ResponseWriter, r *http.Request) {
 // @Success 200 {object} models.MessageData
 // @Failure 400 {object} interface{}
 // @Router /conversations [post]
-// @Security Basic
+// @Security ApiKeyAuth
 func NewMessage(w http.ResponseWriter, r *http.Request) {
 	var data models.Message
 

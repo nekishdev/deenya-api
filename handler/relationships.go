@@ -8,6 +8,17 @@ import (
 	"github.com/clarketm/json"
 )
 
+// MyClients godoc
+// @Summary MyClients
+// @Description MyClients
+// @Tags Clients
+// @ID my-client
+// @Accept  json
+// @Produce  json
+// @Success 200 {array} models.UserData
+// @Failure 400 {object} interface{}
+// @Router /clients [get]
+// @Security ApiKeyAuth
 func MyClients(w http.ResponseWriter, r *http.Request) {
 	var clients []models.User
 	var err error
@@ -36,6 +47,17 @@ func MyClients(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// MyConsultants godoc
+// @Summary MyConsultants
+// @Description MyConsultants
+// @Tags Consultants
+// @ID my-consultants
+// @Accept  json
+// @Produce  json
+// @Success 200 {array} models.UserData
+// @Failure 400 {object} interface{}
+// @Router /consultants [get]
+// @Security ApiKeyAuth
 func MyConsultants(w http.ResponseWriter, r *http.Request) {
 	var list []models.User
 	var err error

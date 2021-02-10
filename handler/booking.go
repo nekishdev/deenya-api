@@ -292,6 +292,7 @@ func MyBookings(w http.ResponseWriter, r *http.Request) {
 // @ID accept-booking
 // @Accept  json
 // @Produce  json
+// @Param bookingID path int true "Booking ID"
 // @Success 200 {array} models.BookingData
 // @Failure 400 {object} interface{}
 // @Router /booking/{bookingID}/accept [get]

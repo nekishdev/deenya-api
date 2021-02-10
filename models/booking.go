@@ -4,7 +4,7 @@ import "time"
 
 // @Required ConsultantID
 type BookingData struct {
-	ID              *int64 `db:"id" json:"id,omitempty"`
+	ID              *int64 `db:"id" json:"id,omitempty" readonly:"true"`
 	ConsultantID    *int64 `db:"consultant_id" json:"consultant_id,omitempty"`
 	ClientID        *int64 `db:"client_id" json:"client_id,omitempty" example:"43"`
 	InvoiceID       *int64 `db:"invoice_id" json:"invoice_id,omitempty"` //need to check if invoice is null on frontend?
@@ -14,7 +14,7 @@ type BookingData struct {
 	//FollowUpID   *int64     `db:"follow_up_id"`
 	Inquiry     *string    `db:"inquiry" json:"inquiry,omitempty"`
 	Tags        []*string  `db:"tags" json:"tags,omitempty"`
-	CreatedAt   *time.Time `db:"created_at" json:"created_at,omitempty"`
+	CreatedAt   *time.Time `db:"created_at" json:"created_at,omitempty" readonly:"true"`
 	StartedAt   *time.Time `db:"started_at" json:"started_at,omitempty"`
 	EndedAt     *time.Time `db:"ended_at" json:"ended_at,omitempty"`
 	ScheduledAt *time.Time `db:"scheduled_at" json:"scheduled_at"`

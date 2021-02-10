@@ -18,7 +18,7 @@ import (
 // @ID portfolio-get
 // @Accept  json
 // @Produce  json
-// @Security Basic
+// @Security ApiKeyAuth
 // @Param portfolioID path int true "Portfolio ID"
 // @Success 200 {object} models.PortfolioData
 // @Failure 400 {object} interface{}
@@ -62,7 +62,7 @@ func GetPortfolio(w http.ResponseWriter, r *http.Request) {
 // @ID portfolio-update
 // @Accept  json
 // @Produce  json
-// @Security Basic
+// @Security ApiKeyAuth
 // @Param portfolioID path int true "Portfolio ID"
 // @Param body body models.PortfolioData true "Portfolio data"
 // @Success 200 {object} models.PortfolioData
@@ -109,7 +109,7 @@ func UpdatePortfolio(w http.ResponseWriter, r *http.Request) {
 // @ID portfolio-delete
 // @Accept  json
 // @Produce  json
-// @Security Basic
+// @Security ApiKeyAuth
 // @Param portfolioID path int true "Portfolio ID"
 // @Success 200 {object} JsonResultMessage
 // @Failure 400 {object} interface{}
@@ -162,7 +162,7 @@ func DeletePortfolio(w http.ResponseWriter, r *http.Request) {
 // @ID portfolio-new
 // @Accept  json
 // @Produce  json
-// @Security Basic
+// @Security ApiKeyAuth
 // @Param body body models.PortfolioData true "Portfolio data"
 // @Success 200 {object} models.PortfolioData
 // @Failure 400 {object} interface{}
@@ -280,7 +280,7 @@ func UserPortfolios(w http.ResponseWriter, r *http.Request) {
 // @Success 200 {array} models.PortfolioData
 // @Failure 400 {object} interface{}
 // @Router /portfolios [get]
-// @Security Basic
+// @Security ApiKeyAuth
 
 func MyPortfolios(w http.ResponseWriter, r *http.Request) {
 

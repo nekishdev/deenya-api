@@ -2,6 +2,7 @@ package handler
 
 import (
 	"deenya-api/database"
+	"deenya-api/models"
 	"net/http"
 
 	"github.com/clarketm/json"
@@ -25,11 +26,19 @@ func SearchPortfolios(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// SearchProductModels godoc
+// @Summary SearchProductModels
+// @Description SearchProductModels
+// @Tags Products
+// @ID search-product-models
+// @Accept  json
+// @Produce  json
+// @Param body body models.ProductModelSearchRequest true "Query"
+// @Success 200 {array} models.ProductModelData
+// @Failure 400 {object} interface{}
+// @Router /products/models/search [get]
 func SearchProductModels(w http.ResponseWriter, r *http.Request) {
-	q := struct {
-		query string
-		tags  []string
-	}{}
+	q := models.ProductModelSearchRequest{}
 
 	decoder := json.NewDecoder(r.Body)
 
@@ -38,7 +47,7 @@ func SearchProductModels(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	data, err := database.SearchProductModels(q.query, q.tags)
+	data, err := database.SearchProductModels(q.Query, q.Tags)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return

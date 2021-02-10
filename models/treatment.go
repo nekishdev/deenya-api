@@ -1,7 +1,7 @@
 package models
 
 type TreatmentData struct {
-	ID           *int64    `db:"id" json:"id,omitempty"`
+	ID           *int64    `db:"id" json:"id,omitempty" readonly:"true"`
 	ConsultantID *int64    `db:"consultant_id" json:"consultant_id,omitempty"`
 	ClientID     *int64    `db:"client_id" json:"client_id,omitempty"`
 	OrderID      *int64    `db:"order_id" json:"order_id,omitempty"`
@@ -9,7 +9,7 @@ type TreatmentData struct {
 	Notes        *string   `db:"notes" json:"notes,omitempty"`
 	Tags         []*string `db:"tags" json:"tags,omitempty"`
 	Steps        []*string `db:"steps" json:"steps,omitempty"`
-	CreatedAt    *int64    `db:"created_at" json:"created_at"`
+	CreatedAt    *int64    `db:"created_at" json:"created_at" readonly:"true"`
 }
 
 type Treatment struct {

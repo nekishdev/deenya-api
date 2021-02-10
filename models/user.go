@@ -42,11 +42,11 @@ type UserAnalytics struct { //query results
 }
 
 type UserBase struct {
-	ID        *int64     `json:"id,omitempty" db:"id"`
+	ID        *int64     `json:"id,omitempty" db:"id" readonly:"true"`
 	Email     *string    `json:"email,omitempty" db:"email"`
 	Username  *string    `json:"username,omitempty" db:"username"`
 	Password  *string    `json:"password" db:"password"`
-	CreatedAt *time.Time `json:"created_at,omitempty" db:"created_at"`
+	CreatedAt *time.Time `json:"created_at,omitempty" db:"created_at" readonly:"true"`
 	Type      *string    `json:"type,omitempty" db:"type"`
 }
 

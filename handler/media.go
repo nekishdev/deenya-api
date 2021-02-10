@@ -10,6 +10,18 @@ import (
 	"github.com/go-chi/chi"
 )
 
+// GetMedia godoc
+// @Summary GetMedia
+// @Description GetMedia
+// @Tags Media
+// @ID get-media-by-id
+// @Accept  json
+// @Produce  json
+// @Param mediaID path int true "Media ID"
+// @Success 200 {object} models.MediaData
+// @Failure 400 {object} interface{}
+// @Router /media/{mediaID} [get]
+// @Security ApiKeyAuth
 func GetMedia(w http.ResponseWriter, r *http.Request) {
 	var id int64
 	var err error
@@ -42,6 +54,19 @@ func GetMedia(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// UpdateMedia godoc
+// @Summary UpdateMedia
+// @Description UpdateMedia
+// @Tags Media
+// @ID update-media-by-id
+// @Accept  json
+// @Produce  json
+// @Param mediaID path int true "Media ID"
+// @Param body body models.MediaData true "Media Object"
+// @Success 200 {object} models.MediaData
+// @Failure 400 {object} interface{}
+// @Router /media/{mediaID} [put]
+// @Security ApiKeyAuth
 func UpdateMedia(w http.ResponseWriter, r *http.Request) {
 	var data models.Media
 
@@ -62,6 +87,18 @@ func UpdateMedia(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// DeleteMedia godoc
+// @Summary DeleteMedia
+// @Description DeleteMedia
+// @Tags Media
+// @ID delete-media-by-id
+// @Accept  json
+// @Produce  json
+// @Param mediaID path int true "Media ID"
+// @Success 200 {object} models.JsonResultMessage
+// @Failure 400 {object} interface{}
+// @Router /media/{mediaID} [delete]
+// @Security ApiKeyAuth
 func DeleteMedia(w http.ResponseWriter, r *http.Request) {
 	var id int64
 	var err error
@@ -82,9 +119,7 @@ func DeleteMedia(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp := struct {
-		Message string `json:"message"`
-	}{
+	resp := models.JsonResultMessage{
 		Message: "Success",
 	}
 
@@ -98,6 +133,18 @@ func DeleteMedia(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// NewMedia godoc
+// @Summary NewMedia
+// @Description NewMedia
+// @Tags Media
+// @ID new-media
+// @Accept  json
+// @Produce  json
+// @Param body body models.MediaData true "Media Object"
+// @Success 200 {object} models.MediaData
+// @Failure 400 {object} interface{}
+// @Router /media [post]
+// @Security ApiKeyAuth
 func NewMedia(w http.ResponseWriter, r *http.Request) {
 	var data models.Media
 
@@ -150,6 +197,17 @@ func UserMedia(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
+// MyMedia godoc
+// @Summary My media
+// @Description My media list
+// @Tags Media
+// @ID my-media
+// @Accept  json
+// @Produce  json
+// @Success 200 {array} models.MediaData
+// @Failure 400 {object} interface{}
+// @Router /media [get]
+// @Security ApiKeyAuth
 func MyMedia(w http.ResponseWriter, r *http.Request) {
 	var err error
 

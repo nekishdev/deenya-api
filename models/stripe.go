@@ -21,14 +21,13 @@ type StripeMetadata struct {
 }
 
 type StripeCustomer struct {
-	ID            *int64
-	ClientID      *int64  `db:"client_id" json:"client_id"`
-	ConsultantID  *int64  `db:"consultant_id" json:"consultant_id"`
-	CustomerToken *string `db:"stripe_customer_id" json:"stripe_customer_id"`
+	ID            *int64  `db:"id" json:"id,omitempty"`
+	ClientID      *int64  `db:"client_id" json:"client_id,omitempty"`
+	CustomerToken *string `db:"stripe_customer_id" json:"stripe_customer_id,omitempty"`
 
-	DefaultSource   *string       `db:"default_source" json:"default_source"`
-	Currency        *string       `db:"currency" json:"currency"`
-	BillingEmail    *string       `db:"billing_email" json:"billing_email"`
+	DefaultSource   *string       `db:"default_source" json:"default_source,omitempty"`
+	Currency        *string       `db:"currency" json:"currency,omitempty"`
+	BillingEmail    *string       `db:"billing_email" json:"billing_email,omitempty"`
 	BillingAddress  StripeAddress `json:"billing_address,omitempty"`
 	ShippingAddress StripeAddress `json:"shipping_address,omitempty"`
 

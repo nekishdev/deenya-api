@@ -332,6 +332,7 @@ func UserProductsPage(w http.ResponseWriter, r *http.Request) {
 // @Success 200 {array} models.ProductModelData
 // @Failure 400 {object} interface{}
 // @Router /products/models/suggest [get]
+
 func SuggestProductModels(w http.ResponseWriter, r *http.Request) {
 	q := models.ProductModelSuggestRequest{}
 

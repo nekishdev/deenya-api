@@ -225,3 +225,5 @@ func UserOrders(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
 }
+
+//PENDING - order_delivery

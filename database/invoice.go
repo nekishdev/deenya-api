@@ -47,7 +47,7 @@ func UpdateInvoice(data models.Invoice) error {
 		fmt.Println(err)
 		return err
 	}
-	q := "UPDATE public.product " + uquery + " WHERE id = :id"
+	q := "UPDATE public.invoice " + uquery + " WHERE id = :id"
 	_, err = db.NamedQuery(q, data)
 	if err != nil {
 		fmt.Println(err)

@@ -116,7 +116,14 @@ func UpdateInvoice(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err := database.UpdateInvoice(data)
+	q := chi.URLParam(r, "invoiceID")
+	id, err := strconv.ParseInt(q, 10, 64)
+	if err != nil {
+		panic("strconv")
+	}
+
+	data.ID = &id
+	err = database.UpdateInvoice(data)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return

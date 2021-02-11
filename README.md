@@ -6,7 +6,8 @@ App: Golang.
 
 DB: PostgreSQL.
 
-Docs: Swagger.
+Документация: Swagger.
+Чтобы открыть документацию, можно зайти на https://editor.swagger.io/ и импортировать файл docs/swagger.yaml
 
 Start:
 1. Update the .env file (fill DB settings)

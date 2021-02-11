@@ -4,12 +4,18 @@ import (
 	"deenya-api/database"
 	"deenya-api/handler"
 	"fmt"
+	"github.com/joho/godotenv"
+	"github.com/swaggo/swag"
+	"log"
 	"net/http"
+	"os"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/cors"
 	"github.com/go-chi/jwtauth"
+
+	_ "deenya-api/docs"
 )
 
 // @title AvaMed API
@@ -27,11 +33,17 @@ import (
 // @in header
 // @name Authorization
 
-// @host localhost:3333
+// @host localhost:8080
 // @BasePath /
 func main() {
 
 	var err error
+
+	err = godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
 	database.Init()
 
 	r := chi.NewRouter()
@@ -376,8 +388,20 @@ func main() {
 	r.Post("/login", handler.Login)
 	r.Post("/register", handler.Register)
 
-	//TODO-Gor get port from env
-	err = http.ListenAndServe(":3333", r)
+	r.Get("/swagger", func(w http.ResponseWriter, r *http.Request) {
+		str, err := swag.ReadDoc()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		handler.WriteAsJSON(w, []byte(str))
+	})
+
+	port := os.Getenv("APP_PORT")
+	if port == "" {
+		port = "8080"
+	}
+	err = http.ListenAndServe(":"+port, r)
 	if err != nil {
 		fmt.Println("ListenAndServe:", err)
 	}

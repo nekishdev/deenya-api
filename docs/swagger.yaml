@@ -1,0 +1,2594 @@
+basePath: /
+definitions:
+  handler.JwtToken:
+    properties:
+      token:
+        type: string
+    type: object
+  models.BookingData:
+    properties:
+      client_id:
+        example: 43
+        type: integer
+      consultant_id:
+        type: integer
+      conversation_id:
+        type: integer
+      created_at:
+        readOnly: true
+        type: string
+      elapsed:
+        type: integer
+      ended_at:
+        type: string
+      id:
+        readOnly: true
+        type: integer
+      inquiry:
+        description: FollowUpID   *int64     `db:"follow_up_id"`
+        type: string
+      invoice_id:
+        description: need to check if invoice is null on frontend?
+        type: integer
+      is_accepted:
+        type: boolean
+      is_remote:
+        type: boolean
+      questionnaire_id:
+        type: integer
+      scheduled_at:
+        type: string
+      started_at:
+        type: string
+      status:
+        type: string
+      tags:
+        items:
+          type: string
+        type: array
+      treatment_id:
+        type: integer
+    type: object
+  models.ClinicData:
+    properties:
+      admin_ids:
+        items:
+          type: integer
+        type: array
+      city:
+        type: string
+      country:
+        type: string
+      id:
+        readOnly: true
+        type: integer
+      lat:
+        description: places ID
+        type: number
+      lng:
+        type: number
+      name:
+        type: string
+      postcode:
+        type: string
+      street:
+        type: string
+    type: object
+  models.ClinicMemberData:
+    properties:
+      clinic_id:
+        type: integer
+      consultant_id:
+        type: integer
+      created_at:
+        readOnly: true
+        type: string
+      id:
+        readOnly: true
+        type: integer
+      is_accepted:
+        description: request or member
+        type: boolean
+    type: object
+  models.ConversationData:
+    properties:
+      created_at:
+        description: |-
+          LatestMessageID *int64   `db:"latest_message_id" json:"latest_message_id,omitempty"`
+          ConsultantID *int64 `db:"consultant_id" json:"consultant_id,omitempty"`
+          ClientID     *int64 `db:"client_id" json:"client_id,omitempty"`
+          UpdatedAt
+        readOnly: true
+        type: string
+      id:
+        readOnly: true
+        type: integer
+      participant_ids:
+        items:
+          type: integer
+        type: array
+    type: object
+  models.ForumPostData:
+    properties:
+      content:
+        type: string
+      created_at:
+        readOnly: true
+        type: string
+      id:
+        readOnly: true
+        type: integer
+      media_ids:
+        items:
+          type: integer
+        type: array
+      owner_id:
+        type: integer
+      points:
+        type: integer
+      thread_id:
+        type: integer
+    type: object
+  models.ForumThreadData:
+    properties:
+      created_at:
+        readOnly: true
+        type: string
+      id:
+        readOnly: true
+        type: integer
+      main_post_id:
+        type: integer
+      owner_id:
+        type: integer
+      tags.omitempty:
+        items:
+          type: string
+        type: array
+      title:
+        type: string
+    type: object
+  models.InvoiceData:
+    properties:
+      client_id:
+        type: integer
+      consultant_id:
+        type: integer
+      created_at:
+        readOnly: true
+        type: string
+      id:
+        readOnly: true
+        type: integer
+      is_booking:
+        type: boolean
+      is_order:
+        type: boolean
+      is_paid:
+        type: boolean
+      total:
+        type: integer
+    type: object
+  models.JsonResultMessage:
+    properties:
+      message:
+        type: string
+    type: object
+  models.LoginData:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  models.MediaData:
+    properties:
+      created_at:
+        readOnly: true
+        type: string
+      id:
+        readOnly: true
+        type: integer
+      owner_id:
+        type: integer
+      src:
+        type: string
+    type: object
+  models.MessageData:
+    properties:
+      content:
+        type: string
+      conversation_id:
+        type: integer
+      created_at:
+        readOnly: true
+        type: string
+      id:
+        readOnly: true
+        type: integer
+      media_ids:
+        items:
+          type: integer
+        type: array
+      owner_id:
+        type: integer
+      read_at:
+        type: string
+      updated_at:
+        readOnly: true
+        type: string
+    type: object
+  models.OrderData:
+    properties:
+      client_id:
+        type: integer
+      consultant_id:
+        type: integer
+      created_at:
+        readOnly: true
+        type: string
+      discount:
+        description: InvoiceID *int64     `db:"invoice_id" json:"invoice_id,omitempty"` //create invoice on order creation
+        type: integer
+      id:
+        readOnly: true
+        type: integer
+      status:
+        type: string
+      total:
+        type: integer
+    type: object
+  models.PortfolioData:
+    properties:
+      after_id:
+        type: integer
+      before_id:
+        type: integer
+      caption:
+        type: string
+      client_id:
+        type: integer
+      consulant_id:
+        type: integer
+      created_at:
+        readOnly: true
+        type: string
+      id:
+        readOnly: true
+        type: integer
+      is_published:
+        type: boolean
+      likes:
+        type: integer
+      views:
+        type: integer
+    type: object
+  models.PostData:
+    properties:
+      content:
+        description: render in html - media src embedded
+        type: string
+      created_at:
+        readOnly: true
+        type: string
+      excerpt:
+        type: string
+      id:
+        readOnly: true
+        type: integer
+      is_published:
+        type: boolean
+      likes:
+        description: instead of likes
+        type: integer
+      owner_id:
+        type: integer
+      scheduled_at:
+        type: string
+      tags:
+        description: instead of tags
+        items:
+          type: string
+        type: array
+      title:
+        type: string
+      views:
+        type: integer
+    type: object
+  models.ProductData:
+    properties:
+      created_at:
+        readOnly: true
+        type: string
+      id:
+        readOnly: true
+        type: integer
+      is_available:
+        description: |-
+          IsFeatured  *bool      `json:"is_featured,omitempty" db:"is_featured"`
+          IsPublished *bool      `json:"is_published,omitempty" db:"is_published"`
+        type: boolean
+      owner_id:
+        type: integer
+      price:
+        description: |-
+          MediaIDs []*int64 `json:"media_ids,omitempty" db:"media_ids"`
+          GroupIDs []*int64 `json:"group_id,omitempty" db:"group_ids"` //availability
+          LocationID *int64   `json:"location_id,omitempty" db:"location_id"`
+          Name   *string `json:"name,omitempty" db:"name"`
+        type: integer
+      product_model_id:
+        type: integer
+      stock:
+        type: integer
+    type: object
+  models.ProductModelData:
+    properties:
+      description:
+        type: string
+      id:
+        readOnly: true
+        type: integer
+      media_ids:
+        items:
+          type: integer
+        type: array
+      name:
+        type: string
+      price:
+        type: integer
+      tags:
+        description: or just tags []string?
+        items:
+          type: string
+        type: array
+    type: object
+  models.ProductModelSearchRequest:
+    properties:
+      query:
+        type: string
+      tags:
+        items:
+          type: string
+        type: array
+    type: object
+  models.ProductModelSuggestRequest:
+    properties:
+      tags:
+        items:
+          type: string
+        type: array
+    type: object
+  models.QuestionData:
+    properties:
+      answer:
+        description: array in case of checklist, multiple answers. Or just use a delimiter such as comma and process string depending on type?
+        type: string
+      answered_at:
+        type: string
+      asked_at:
+        type: string
+      choices:
+        description: nullable
+        items:
+          type: string
+        type: array
+      id:
+        readOnly: true
+        type: integer
+      owner_id:
+        type: integer
+      question:
+        description: array or delimiter
+        type: string
+      questionnaire_id:
+        description: ID of questionnaire it belongs to
+        type: integer
+      type:
+        description: multi, single, small_text, large_text
+        type: string
+    type: object
+  models.QuestionnaireData:
+    properties:
+      booking_id:
+        type: integer
+      client_id:
+        type: integer
+      consultant_id:
+        type: integer
+      created_at:
+        readOnly: true
+        type: string
+      id:
+        readOnly: true
+        type: integer
+      name:
+        type: string
+      updated_at:
+        readOnly: true
+        type: string
+    type: object
+  models.TreatmentData:
+    properties:
+      client_id:
+        type: integer
+      consultant_id:
+        type: integer
+      created_at:
+        readOnly: true
+        type: integer
+      id:
+        readOnly: true
+        type: integer
+      notes:
+        type: string
+      order_id:
+        type: integer
+      portfolio_id:
+        type: integer
+      steps:
+        items:
+          type: string
+        type: array
+      tags:
+        items:
+          type: string
+        type: array
+    type: object
+  models.UserData:
+    properties:
+      available_from:
+        type: integer
+      available_to:
+        type: integer
+      city:
+        type: string
+      clinic_id:
+        type: integer
+      country:
+        type: string
+      created_at:
+        readOnly: true
+        type: string
+      email:
+        type: string
+      first_name:
+        type: string
+      gender:
+        type: string
+      id:
+        readOnly: true
+        type: integer
+      last_name:
+        type: string
+      password:
+        type: string
+      profile_picture_id:
+        type: integer
+      stripe_account_id:
+        type: string
+      tags:
+        description: for identifying user skin types etc for matching with correct products and questionnaires etc
+        items:
+          type: string
+        type: array
+      timezone:
+        description: or store in user consultant
+        type: string
+      title:
+        type: string
+      type:
+        type: string
+      username:
+        type: string
+    type: object
+host: localhost:3333
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a REST API for AvaMed
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: AvaMed API
+  version: "1.0"
+paths:
+  /{bookingID}/questionnaire:
+    post:
+      consumes:
+      - application/json
+      description: Create a new questionnaire object for a booking
+      operationId: questionnaire-new
+      parameters:
+      - description: Booking ID
+        in: path
+        name: bookingID
+        required: true
+        type: integer
+      - description: Questionnaire Object
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.QuestionnaireData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.QuestionnaireData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Create a new questionnaire object for a booking
+      tags:
+      - User
+  /booking/{bookingID}/accept:
+    get:
+      consumes:
+      - application/json
+      description: Allows a consultant to accept a booking request
+      operationId: accept-booking
+      parameters:
+      - description: Booking ID
+        in: path
+        name: bookingID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.BookingData'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Allows a consultant to accept a booking request
+      tags:
+      - Booking
+  /bookings/:
+    get:
+      consumes:
+      - application/json
+      description: My bookings
+      operationId: my-bookings
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.BookingData'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: My bookings
+      tags:
+      - Booking
+    post:
+      consumes:
+      - application/json
+      description: New booking
+      operationId: new-booking
+      parameters:
+      - description: Booking
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.BookingData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BookingData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: New booking
+      tags:
+      - Booking
+  /bookings/{bookingID}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete booking by id
+      operationId: delete-booking-by-id
+      parameters:
+      - description: Booking ID
+        in: path
+        name: bookingID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JsonResultMessage'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Delete booking by ID
+      tags:
+      - Booking
+    get:
+      consumes:
+      - application/json
+      description: Get booking by id
+      operationId: get-booking-by-id
+      parameters:
+      - description: Booking ID
+        in: path
+        name: bookingID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BookingData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Get booking by ID
+      tags:
+      - Booking
+    put:
+      consumes:
+      - application/json
+      description: Update booking by id
+      operationId: update-booking-by-id
+      parameters:
+      - description: Booking ID
+        in: path
+        name: bookingID
+        required: true
+        type: integer
+      - description: Booking data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.BookingData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BookingData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Update booking by ID
+      tags:
+      - Booking
+  /clients:
+    get:
+      consumes:
+      - application/json
+      description: MyClients
+      operationId: my-client
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.UserData'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: MyClients
+      tags:
+      - Clients
+  /clinics:
+    get:
+      consumes:
+      - application/json
+      description: MyClinic
+      operationId: MyClinic
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ClinicData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: MyClinic
+      tags:
+      - Clinic
+    post:
+      consumes:
+      - application/json
+      description: NewClinic
+      operationId: NewClinic
+      parameters:
+      - description: Clinic data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.ClinicData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ClinicData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: NewClinic
+      tags:
+      - Clinic
+  /clinics/{clinicID}:
+    delete:
+      consumes:
+      - application/json
+      description: LeaveClinic
+      operationId: LeaveClinic
+      parameters:
+      - description: Clinic ID
+        in: path
+        name: clinicID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JsonResultMessage'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: LeaveClinic
+      tags:
+      - Clinic
+    get:
+      consumes:
+      - application/json
+      description: ListClinicConsultants
+      operationId: ListClinicConsultants
+      parameters:
+      - description: Clinic ID
+        in: path
+        name: clinicID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.UserData'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: ListClinicConsultants
+      tags:
+      - Clinic
+    post:
+      consumes:
+      - application/json
+      description: NewClinicRequest
+      operationId: NewClinicRequest
+      parameters:
+      - description: Clinic ID
+        in: path
+        name: clinicID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ClinicMemberData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: NewClinicRequest
+      tags:
+      - Clinic
+    put:
+      consumes:
+      - application/json
+      description: UpdateClinic
+      operationId: UpdateClinic
+      parameters:
+      - description: Clinic ID
+        in: path
+        name: clinicID
+        required: true
+        type: integer
+      - description: Clinic data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.ClinicData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ClinicData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: UpdateClinic
+      tags:
+      - Clinic
+  /clinics/{clinicID}/{consultantID}/accept:
+    get:
+      consumes:
+      - application/json
+      description: AcceptClinicRequest
+      operationId: AcceptClinicRequest
+      parameters:
+      - description: Clinic ID
+        in: path
+        name: clinicID
+        required: true
+        type: integer
+      - description: Consultant ID
+        in: path
+        name: consultantID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JsonResultMessage'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: AcceptClinicRequest
+      tags:
+      - Clinic
+  /clinics/{clinicID}/{consultantID}/remove:
+    get:
+      consumes:
+      - application/json
+      description: RemoveClinicMember
+      operationId: RemoveClinicMember
+      parameters:
+      - description: Clinic ID
+        in: path
+        name: clinicID
+        required: true
+        type: integer
+      - description: Consultant ID
+        in: path
+        name: consultantID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JsonResultMessage'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: RemoveClinicMember
+      tags:
+      - Clinic
+  /consultants:
+    get:
+      consumes:
+      - application/json
+      description: MyConsultants
+      operationId: my-consultants
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.UserData'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: MyConsultants
+      tags:
+      - Consultants
+  /conversations:
+    post:
+      consumes:
+      - application/json
+      description: Delete message object
+      operationId: message-new
+      parameters:
+      - description: Message
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/models.MessageData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.MessageData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete message object
+      tags:
+      - Message
+  /conversations/{conversationID}/{messageID}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete message object
+      operationId: message-delete
+      parameters:
+      - description: Message ID
+        in: path
+        name: messageID
+        required: true
+        type: integer
+      - description: Conversation ID
+        in: path
+        name: conversationID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JsonResultMessage'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete message object
+      tags:
+      - Message
+    get:
+      consumes:
+      - application/json
+      description: Get message object
+      operationId: message-get
+      parameters:
+      - description: Message ID
+        in: path
+        name: messageID
+        required: true
+        type: integer
+      - description: Conversation ID
+        in: path
+        name: conversationID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.MessageData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get message object
+      tags:
+      - Message
+    put:
+      consumes:
+      - application/json
+      description: Update message object
+      operationId: message-update
+      parameters:
+      - description: Message ID
+        in: path
+        name: messageID
+        required: true
+        type: integer
+      - description: Conversation ID
+        in: path
+        name: conversationID
+        required: true
+        type: integer
+      - description: Message
+        in: body
+        name: message
+        required: true
+        schema:
+          type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.MessageData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Update message object
+      tags:
+      - Message
+  /finance/{invoiceID}:
+    get:
+      consumes:
+      - application/json
+      description: GetInvoice
+      operationId: GetInvoice
+      parameters:
+      - description: Invoice ID
+        in: path
+        name: invoiceID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.InvoiceData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: GetInvoice
+      tags:
+      - Finance
+    put:
+      consumes:
+      - application/json
+      description: UpdateInvoice
+      operationId: UpdateInvoice
+      parameters:
+      - description: Invoice ID
+        in: path
+        name: invoiceID
+        required: true
+        type: integer
+      - description: Invoice data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.InvoiceData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.InvoiceData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: UpdateInvoice
+      tags:
+      - Finance
+  /finance/invoices:
+    get:
+      consumes:
+      - application/json
+      description: MyInvoices
+      operationId: MyInvoices
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.InvoiceData'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: MyInvoices
+      tags:
+      - Finance
+    post:
+      consumes:
+      - application/json
+      description: NewInvoice
+      operationId: NewInvoice
+      parameters:
+      - description: Invoice data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.InvoiceData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.InvoiceData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: NewInvoice
+      tags:
+      - Finance
+  /forum:
+    get:
+      consumes:
+      - application/json
+      description: MyForumThreads
+      operationId: MyForumThreads
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.ForumThreadData'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: MyForumThreads
+      tags:
+      - Forum
+    post:
+      consumes:
+      - application/json
+      description: NewForumThread
+      operationId: NewForumThread
+      parameters:
+      - description: Thread data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.ForumThreadData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ForumThreadData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: NewForumThread
+      tags:
+      - Forum
+  /forum/{threadID}:
+    delete:
+      consumes:
+      - application/json
+      description: DeleteForumThread
+      operationId: DeleteForumThread
+      parameters:
+      - description: Thread id
+        in: path
+        name: threadID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JsonResultMessage'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: DeleteForumThread
+      tags:
+      - Forum
+    get:
+      consumes:
+      - application/json
+      description: Get forum thread object by ID
+      operationId: forum-thread-get
+      parameters:
+      - description: Forum Thread ID
+        in: path
+        name: threadID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ForumThreadData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get forum thread object by ID
+      tags:
+      - Forum
+    post:
+      consumes:
+      - application/json
+      description: NewForumPost
+      operationId: NewForumPost
+      parameters:
+      - description: Thread id
+        in: path
+        name: threadID
+        required: true
+        type: integer
+      - description: Forum Post data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.ForumPostData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ForumPostData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: NewForumPost
+      tags:
+      - Forum
+    put:
+      consumes:
+      - application/json
+      description: Update forum thread object
+      operationId: forum-thread-update
+      parameters:
+      - description: Forum Thread ID
+        in: path
+        name: threadID
+        required: true
+        type: integer
+      - description: Forum Thread
+        in: body
+        name: forum-thread
+        required: true
+        schema:
+          $ref: '#/definitions/models.ForumThreadData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ForumThreadData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Update forum thread object
+      tags:
+      - Forum
+  /forum/{threadID}/{postID}:
+    delete:
+      consumes:
+      - application/json
+      description: DeleteForumPost
+      operationId: DeleteForumPost
+      parameters:
+      - description: Thread id
+        in: path
+        name: threadID
+        required: true
+        type: integer
+      - description: Post id
+        in: path
+        name: postID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JsonResultMessage'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: DeleteForumPost
+      tags:
+      - Forum
+    get:
+      consumes:
+      - application/json
+      description: GetForumPost
+      operationId: GetForumPost
+      parameters:
+      - description: Thread id
+        in: path
+        name: threadID
+        required: true
+        type: integer
+      - description: Post id
+        in: path
+        name: postID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ForumPostData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: GetForumPost
+      tags:
+      - Forum
+    put:
+      consumes:
+      - application/json
+      description: UpdateForumPost
+      operationId: UpdateForumPost
+      parameters:
+      - description: Thread id
+        in: path
+        name: threadID
+        required: true
+        type: integer
+      - description: Post id
+        in: path
+        name: postID
+        required: true
+        type: integer
+      - description: Post data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.ForumPostData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ForumPostData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: UpdateForumPost
+      tags:
+      - Forum
+  /forum/{threadID}/posts:
+    get:
+      consumes:
+      - application/json
+      description: ForumThreadPosts
+      operationId: ForumThreadPosts
+      parameters:
+      - description: Thread id
+        in: path
+        name: threadID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.ForumPostData'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: ForumThreadPosts
+      tags:
+      - Forum
+  /forum/feed:
+    get:
+      consumes:
+      - application/json
+      description: FeedForumThreads
+      operationId: FeedForumThreads
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.ForumThreadData'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: FeedForumThreads
+      tags:
+      - Forum
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: Login user
+      operationId: login-register
+      parameters:
+      - description: Login data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.LoginData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.JwtToken'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Login
+      tags:
+      - Auth
+  /media:
+    get:
+      consumes:
+      - application/json
+      description: My media list
+      operationId: my-media
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.MediaData'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: My media
+      tags:
+      - Media
+    post:
+      consumes:
+      - application/json
+      description: NewMedia
+      operationId: new-media
+      parameters:
+      - description: Media Object
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.MediaData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.MediaData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: NewMedia
+      tags:
+      - Media
+  /media/{mediaID}:
+    delete:
+      consumes:
+      - application/json
+      description: DeleteMedia
+      operationId: delete-media-by-id
+      parameters:
+      - description: Media ID
+        in: path
+        name: mediaID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JsonResultMessage'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: DeleteMedia
+      tags:
+      - Media
+    get:
+      consumes:
+      - application/json
+      description: GetMedia
+      operationId: get-media-by-id
+      parameters:
+      - description: Media ID
+        in: path
+        name: mediaID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.MediaData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: GetMedia
+      tags:
+      - Media
+    put:
+      consumes:
+      - application/json
+      description: UpdateMedia
+      operationId: update-media-by-id
+      parameters:
+      - description: Media ID
+        in: path
+        name: mediaID
+        required: true
+        type: integer
+      - description: Media Object
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.MediaData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.MediaData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: UpdateMedia
+      tags:
+      - Media
+  /orders/{orderID}:
+    get:
+      consumes:
+      - application/json
+      description: Get order object
+      operationId: order-get
+      parameters:
+      - description: Order ID
+        in: path
+        name: orderID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.OrderData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Get order object
+      tags:
+      - Order
+    put:
+      consumes:
+      - application/json
+      description: Update order object
+      operationId: new-order
+      parameters:
+      - description: Order ID
+        in: path
+        name: orderID
+        required: true
+        type: integer
+      - description: Update order
+        in: body
+        name: order
+        required: true
+        schema:
+          $ref: '#/definitions/models.OrderData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.OrderData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Update order object
+      tags:
+      - Order
+  /posts:
+    get:
+      consumes:
+      - application/json
+      description: Get a user's own post objects
+      operationId: my-posts
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.PostData'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Get a user's own post objects
+      tags:
+      - Post
+    post:
+      consumes:
+      - application/json
+      description: Create a new post object
+      operationId: post-new
+      parameters:
+      - description: Post data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.PostData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.PostData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Create a new post object
+      tags:
+      - Post
+  /posts/{postID}:
+    delete:
+      consumes:
+      - application/json
+      description: DeletePost
+      operationId: DeletePost
+      parameters:
+      - description: Post ID
+        in: path
+        name: postID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JsonResultMessage'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: DeletePost
+      tags:
+      - Post
+    put:
+      consumes:
+      - application/json
+      description: Update a post object
+      operationId: post-update
+      parameters:
+      - description: Post ID
+        in: path
+        name: postID
+        required: true
+        type: integer
+      - description: Post data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.PostData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.PostData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Update a post object
+      tags:
+      - Post
+  /products:
+    get:
+      consumes:
+      - application/json
+      description: MyProducts
+      operationId: my-products
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.ProductData'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: MyProducts
+      tags:
+      - Products
+    post:
+      consumes:
+      - application/json
+      description: NewProduct
+      operationId: new-product
+      parameters:
+      - description: Product Object
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProductData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ProductData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: NewProduct
+      tags:
+      - Products
+  /products/{productID}:
+    delete:
+      consumes:
+      - application/json
+      description: DeleteProduct
+      operationId: delete-product
+      parameters:
+      - description: Product ID
+        in: path
+        name: productID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JsonResultMessage'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: DeleteProduct
+      tags:
+      - Products
+    get:
+      consumes:
+      - application/json
+      description: GetProduct
+      operationId: get-product
+      parameters:
+      - description: Product ID
+        in: path
+        name: productID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ProductData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: GetProduct
+      tags:
+      - Products
+    put:
+      consumes:
+      - application/json
+      description: UpdateProduct
+      operationId: update-product
+      parameters:
+      - description: Product ID
+        in: path
+        name: productID
+        required: true
+        type: integer
+      - description: Product Object
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProductData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ProductData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: UpdateProduct
+      tags:
+      - Products
+  /products/models/search:
+    get:
+      consumes:
+      - application/json
+      description: SearchProductModels
+      operationId: search-product-models
+      parameters:
+      - description: Query
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProductModelSearchRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.ProductModelData'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: SearchProductModels
+      tags:
+      - Products
+  /products/models/suggest:
+    get:
+      consumes:
+      - application/json
+      description: SuggestProductModels
+      operationId: suggest-product-models
+      parameters:
+      - description: Query
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProductModelSuggestRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.ProductModelData'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: SuggestProductModels
+      tags:
+      - Products
+  /questionnaires/{questionnaireID}:
+    get:
+      consumes:
+      - application/json
+      description: Get questionnaire object by ID
+      operationId: questionnaire-get
+      parameters:
+      - description: Questionnaire ID
+        in: path
+        name: questionnaireID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.QuestionnaireData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get questionnaire object by ID
+      tags:
+      - User
+    post:
+      consumes:
+      - application/json
+      description: Update question object
+      operationId: question-update
+      parameters:
+      - description: Questionnaire ID
+        in: path
+        name: questionnaireID
+        required: true
+        type: integer
+      - description: Question Object
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.QuestionData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.QuestionData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Update question object
+      tags:
+      - User
+    put:
+      consumes:
+      - application/json
+      description: Delete questionnaire object
+      operationId: questionnaire-delete
+      parameters:
+      - description: Questionnaire ID
+        in: path
+        name: questionnaireID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JsonResultMessage'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete questionnaire object
+      tags:
+      - User
+  /questionnaires/{questionnaireID}/:
+    post:
+      consumes:
+      - application/json
+      description: Create new question object for a questionnaire
+      operationId: question-new
+      parameters:
+      - description: Questionnaire ID
+        in: path
+        name: questionnaireID
+        required: true
+        type: integer
+      - description: Question Object
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.QuestionData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.QuestionData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Create new question object for a questionnaire
+      tags:
+      - User
+  /questionnaires/{questionnaireID}/{questionID}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a question object
+      operationId: question-delete
+      parameters:
+      - description: Questionnaire ID
+        in: path
+        name: questionnaireID
+        required: true
+        type: integer
+      - description: Question ID
+        in: path
+        name: questionID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JsonResultMessage'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete a question object
+      tags:
+      - User
+  /register:
+    post:
+      consumes:
+      - application/json
+      description: Register user
+      operationId: auth-register
+      parameters:
+      - description: User data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Register
+      tags:
+      - Auth
+  /treatments/:
+    get:
+      consumes:
+      - application/json
+      description: My treatments
+      operationId: my-treatments
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.TreatmentData'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: My treatments
+      tags:
+      - Treatment
+  /treatments/{treatmentID}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Treatment by id
+      operationId: delete-treatment-by-id
+      parameters:
+      - description: Treatment ID
+        in: path
+        name: treatmentID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JsonResultMessage'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Delete Treatment by ID
+      tags:
+      - Treatment
+    get:
+      consumes:
+      - application/json
+      description: Get treatment by id
+      operationId: get-treatment-by-id
+      parameters:
+      - description: Treatment ID
+        in: path
+        name: treatmentID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TreatmentData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Get treatment by ID
+      tags:
+      - Treatment
+    put:
+      consumes:
+      - application/json
+      description: Update Treatment by id
+      operationId: update-treatment-by-id
+      parameters:
+      - description: Treatment ID
+        in: path
+        name: treatmentID
+        required: true
+        type: integer
+      - description: Treatment data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.TreatmentData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.TreatmentData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Update Treatment by ID
+      tags:
+      - Treatment
+  /users/{userID}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete user by id
+      operationId: delete-user-by-id
+      parameters:
+      - description: User ID
+        in: path
+        name: userID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.JsonResultMessage'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Delete user by ID
+      tags:
+      - User
+    get:
+      consumes:
+      - application/json
+      description: Get user by id
+      operationId: get-user-by-id
+      parameters:
+      - description: User ID
+        in: path
+        name: userID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Get user by ID
+      tags:
+      - User
+    put:
+      consumes:
+      - application/json
+      description: Update user by id
+      operationId: update-user-by-id
+      parameters:
+      - description: User ID
+        in: path
+        name: userID
+        required: true
+        type: integer
+      - description: User data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Update user by ID
+      tags:
+      - User
+  /users/{userID}/available:
+    get:
+      consumes:
+      - application/json
+      description: AvailableBookings
+      operationId: available-bookings
+      parameters:
+      - description: User ID
+        in: path
+        name: userID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              type: integer
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: AvailableBookings
+      tags:
+      - User
+  /users/{userID}/me:
+    get:
+      consumes:
+      - application/json
+      description: My account
+      operationId: get-my-account
+      parameters:
+      - description: User ID
+        in: path
+        name: userID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: My account
+      tags:
+      - User
+  /users/{userID}/portfolios:
+    get:
+      consumes:
+      - application/json
+      description: Get user portfolios by user ID
+      operationId: user-portfolios
+      parameters:
+      - description: User ID
+        in: path
+        name: userID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.PortfolioData'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Get user portfolios by user ID
+      tags:
+      - User Portfolio
+  /users/{userID}/posts:
+    get:
+      consumes:
+      - application/json
+      description: Get user post objects by user ID
+      operationId: user-posts
+      parameters:
+      - description: User ID
+        in: path
+        name: userID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.PostData'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Get user post objects by user ID
+      tags:
+      - User
+  /users/{userID}/products:
+    get:
+      consumes:
+      - application/json
+      description: Get user products by user ID
+      operationId: get-user-products-by-id
+      parameters:
+      - description: User ID
+        in: path
+        name: userID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.ProductData'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Get user products by user ID
+      tags:
+      - User
+  /users/{userID}/public:
+    get:
+      consumes:
+      - application/json
+      description: Get user public by user ID
+      operationId: get-user-public-by-id
+      parameters:
+      - description: User ID
+        in: path
+        name: userID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserData'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Get user public by user ID
+      tags:
+      - User
+  /users/{userID}/threads:
+    get:
+      consumes:
+      - application/json
+      description: Get user threads by user ID
+      operationId: get-user-threads-by-id
+      parameters:
+      - description: User ID
+        in: path
+        name: userID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.ForumThreadData'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+      summary: Get user threads by user ID
+      tags:
+      - User
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
